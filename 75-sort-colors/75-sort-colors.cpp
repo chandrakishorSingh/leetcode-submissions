@@ -9,8 +9,9 @@ public:
                 zeroCount++;
             else if (nums[i] == 1)
                 oneCount++;
-            else
+            else {
                 twoCount++;
+            }
         }
         
         int index = 0;
