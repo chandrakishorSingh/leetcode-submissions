@@ -2,6 +2,7 @@ Solution 1:
 ​
 - Simple iterative binary search
 - I observed that whenever the target is not found, the value of `low` always denotes the correct index and hence I use it.
+- It is important to note that this implementation works because of array values being distinct
 ​
 ```
 class Solution {
