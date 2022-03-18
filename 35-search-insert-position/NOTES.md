@@ -26,3 +26,8 @@ return low;
 // TC: O(log(n))
 // SC: O(1)
 ```
+​
+Solution 2:
+​
+- Same as 1st one just recursive binary search
+​
