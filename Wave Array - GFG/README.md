@@ -1,5 +1,5 @@
 # Wave Array
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a sorted array <strong>arr[]</strong>&nbsp;of distinct integers. Sort the array into a wave-like array and return it<br>
 In other words, arrange the elements into a sequence such that arr[1] &gt;= arr[2] &lt;= arr[3] &gt;= arr[4] &lt;= arr[5].....</span></p>
