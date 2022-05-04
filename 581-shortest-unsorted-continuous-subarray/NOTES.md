@@ -1,25 +1,3 @@
-Solution 1:
-​
-- Create a copy of array and sort it.
-- If at the same position, the elements are different then it means the original element has been replaced to some other position. Hence it was part of that subarray.
-- The subarray will start from the position where first such element is found from left and will end at position where first such element is found from the right.
-​
-```
-class Solution {
-public:
-int findUnsortedSubarray(vector<int>& nums) {
-vector<int> copy(nums.begin(), nums.end());
-sort(copy.begin(), copy.end());
-int start = -1;
-int end = -1;
-for (int i = 0; i < nums.size(); i++) {
-if (copy[i] != nums[i]) {
-start = i;
-break;
-}
-}
-for (int i = nums.size() - 1; i >= 0; i--) {
-if (nums[i] != copy[i]) {
 end = i;
 break;
 }
@@ -33,3 +11,22 @@ return end - start + 1;
 // TC: O(n*log(n))
 // SC: O(n)
 ```
+​
+Solution 2:
+​
+- Find wheather every element is at its final position or not. An element will be at its final position if all element to its right are not smaller than it and all element to its left are not larger than it.
+- This can be achieved using prefix and suffix arrays.
+- The required subarray will begin at left most element which is not at its final position and will end at right most element which is not at its final position.
+​
+```
+class Solution {
+public:
+int findUnsortedSubarray(vector<int>& nums) {
+int n = nums.size();
+vector<int> smallestFromRight(n, nums[n - 1]);
+vector<int> largestFromLeft(n, nums[0]);
+for (int i = n - 2; i >= 0; i--)
+smallestFromRight[i] = min(nums[i], smallestFromRight[i + 1]);
+for (int i = 1; i < n; i++)
+largestFromLeft[i] = max(nums[i], largestFromLeft[i - 1]);
+int start = -1;
