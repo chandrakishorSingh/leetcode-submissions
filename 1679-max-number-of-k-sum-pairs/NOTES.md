@@ -1,13 +1,31 @@
+};
+​
+// TC: O(n) on average
+// SC: O(n)
+```
+​
+Solution 3:
+​
+- Sort the array and use "two pointer" technique.
+​
+```
+class Solution {
 public:
 int maxOperations(vector<int>& nums, int k) {
+sort(nums.begin(), nums.end());
 int count = 0;
-map<int, int> freq;
-for (auto num: nums) {
-if (freq.count(k - num) && freq[k - num] > 0) {
+int start = 0;
+int end = nums.size() - 1;
+while (start < end) {
+int sum = nums[start] + nums[end];
+if (sum > k)
+end--;
+else if (sum < k)
+start++;
+else {
 count++;
-freq[k - num]--;
-} else {
-freq[num]++;
+start++;
+end--;
 }
 }
 return count;
@@ -15,31 +33,5 @@ return count;
 };
 ​
 // TC: O(n*log(n))
-// SC: O(n)
-```
-​
-Solution 3:
-​
-- Using `unordered_map` instead of `map`
-​
-```
-class Solution {
-public:
-int maxOperations(vector<int>& nums, int k) {
-int count = 0;
-unordered_map<int, int> freq;
-for (auto num: nums) {
-if (freq.count(k - num) && freq[k - num] > 0) {
-count++;
-freq[k - num]--;
-} else {
-freq[num]++;
-}
-}
-return count;
-}
-};
-​
-// TC: O(n) on average
-// SC: O(n)
+// SC: O(1)
 ```
