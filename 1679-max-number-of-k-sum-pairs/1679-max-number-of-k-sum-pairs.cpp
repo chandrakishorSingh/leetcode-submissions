@@ -24,5 +24,5 @@ public:
     }
 };
 
-// TC: O(n) on average
-// SC: O(n)
+// TC: O(n*log(n))
+// SC: O(1)
