@@ -1,3 +1,4 @@
+public:
 int maxOperations(vector<int>& nums, int k) {
 int count = 0;
 map<int, int> freq;
