@@ -12,34 +12,31 @@
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        vector<int> arr;
-        inorder(root, arr);
-        
-        int start = 0;
-        int end = arr.size() - 1;
+        unordered_set<int> mp;
         bool result = false;
-        while (start < end) {
-            int sum = arr[start] + arr[end];
-            
-            if (sum > k)
-                end--;
-            else if (sum < k)
-                start++;
-            else {
-                result = true;
-                break;
-            }
-        }
+        
+        inorder(root, mp, k, result);
         
         return result;
     }
     
-    void inorder(TreeNode* root, vector<int>& arr) {
+    void inorder(TreeNode* root, unordered_set<int>& mp, int k, bool& result) {
         if (root == nullptr)
             return;
         
-        inorder(root->left, arr);
-        arr.push_back(root->val);
-        inorder(root->right, arr);
+        if (mp.count(k - root->val)) {
+            result = true;
+            return;
+        } else {
+            mp.insert(root->val);
+        }
+        
+        inorder(root->left, mp, k, result);
+        
+        if (!result)
+            inorder(root->right, mp, k, result);
     }
 };
+
+// TC: O(n)
+// SC: O(n)
