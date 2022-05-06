@@ -5,20 +5,19 @@ public:
         
         for (auto ch: s) {
             if (!st.empty() && st.top().first == ch) {
-                st.push({ ch, st.top().second + 1 });
+                st.top().second += 1;
             } else {
                 st.push({ch, 1});
             }
             
             if (!st.empty() && st.top().second == k) {
-                for (int i = 0; i < k; i++)
-                    st.pop();
+                st.pop();
             }
         }
         
         string result = "";
         while (!st.empty()) {
-            result += st.top().first;   
+            result += string(st.top().second, st.top().first);   
             st.pop();
         }
         
@@ -27,3 +26,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n)
+// SC: O(n)
