@@ -1,25 +1,29 @@
-Solution 1:
+return result == -1 ? "" : string(3, ('0' + result));
+}
+};
 ​
-- Answer will always be from "111", "222", ... "999", "".
-- Just check whether a digit is repeated thrice consecutively.
-- Pick the largest such digit
+// TC: O(n)
+// SC: O(1)
+```
+​
+Solution 2:
+​
+- Same as 1st one but uses one less variable :P
 ​
 ```
 class Solution {
 public:
 string largestGoodInteger(string num) {
 int count = 1;
-char digit = num[0];
 int result = -1;
 for (int i = 1; i < num.size(); i++) {
-if (num[i] == digit) {
+if (num[i] == num[i - 1]) {
 count++;
 if (count == 3) {
-result = max(result, digit - '0');
+result = max(result, num[i] - '0');
 count = 0;
 }
 } else {
-digit = num[i];
 count = 1;
 }
 }
