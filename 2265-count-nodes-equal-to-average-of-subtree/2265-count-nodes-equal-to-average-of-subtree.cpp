@@ -35,3 +35,6 @@ public:
         return {sum, count};
     }
 };
+
+// TC: O(n)
+// SC: O(log(n))
