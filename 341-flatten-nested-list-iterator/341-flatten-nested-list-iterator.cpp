@@ -18,34 +18,32 @@
 
 class NestedIterator {
 public:
-    vector<int> arr;
-    int currentIndex = -1;
+    stack<NestedInteger> st;
     
     NestedIterator(vector<NestedInteger> &nestedList) {
-        for (auto list: nestedList) {
-            if (list.isInteger()) {
-                arr.push_back(list.getInteger());
-            } else {
-                dfs(list);
-            }
+        for (auto it = nestedList.rbegin(); it != nestedList.rend(); it++) {
+            _push((*it), st);
         }
     }
     
     int next() {
-        return arr[++currentIndex];
+        int result = st.top().getInteger();
+        st.pop();
+        return result;
     }
     
     bool hasNext() {
-        return currentIndex + 1 != arr.size();
+        return !st.empty();
     }
     
 private:
-    void dfs(NestedInteger& list) {
-        if (list.isInteger()) {
-            arr.push_back(list.getInteger());
-        } else {
-            for (auto nestedList: list.getList())
-                dfs(nestedList);
+    void _push(NestedInteger& item, stack<NestedInteger>& st) {
+        if (item.isInteger())
+            st.push(item.getInteger());
+        else {
+            auto list = item.getList();
+            for (auto it = list.rbegin(); it != list.rend(); it++)
+                _push(*it, st);
         }
     }
 };
@@ -55,3 +53,6 @@ private:
  * NestedIterator i(nestedList);
  * while (i.hasNext()) cout << i.next();
  */
+
+// TC: O(n)
+// SC: O(max(# of level of nestedness))
