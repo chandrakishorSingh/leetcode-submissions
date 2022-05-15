@@ -11,29 +11,30 @@
  */
 class Solution {
 public:
+    int maxHeight = 0;
+    int sum = 0;
+    
     int deepestLeavesSum(TreeNode* root) {
-        int maxHeight = height(root);
+        dfs(root, 0);
         
-        return getSumAtHeight(root, maxHeight, 1);
+        return sum;
     }
     
-    int height(TreeNode* root) {
+    void dfs(TreeNode* root, int currentHeight) {
         if (root == nullptr)
-            return 0;
+            return;
         
-        auto leftHeight = height(root->left);
-        auto rightHeight = height(root->right);
+        if (maxHeight < currentHeight) {
+            maxHeight = currentHeight;
+            sum = root->val;
+        } else if (maxHeight == currentHeight) {
+            sum += root->val;
+        }
         
-        return max(leftHeight, rightHeight) + 1;
-    }
-    
-    int getSumAtHeight(TreeNode* root, int height, int currentHeight) {
-        if (root == nullptr)
-            return 0;
-        
-        auto leftSum = getSumAtHeight(root->left, height, currentHeight + 1);
-        auto rightSum = getSumAtHeight(root->right, height, currentHeight + 1);
-        
-        return leftSum + rightSum + (currentHeight == height ? root->val: 0);
+        dfs(root->left, currentHeight + 1);
+        dfs(root->right, currentHeight + 1);
     }
 };
+
+// TC: O(n)
+// SC: O(height of tree)
