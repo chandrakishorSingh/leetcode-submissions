@@ -1,6 +1,9 @@
-Solution 1:
+// SC: O(height of tree)
+```
 ​
-- Simple DFS.
+Solution 2:
+​
+- Same as 1st one but using BFS.
 ​
 ```
 /**
@@ -18,15 +21,24 @@ public:
 TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
 if (original == nullptr)
 return nullptr;
-if (target->val == cloned->val)
-return cloned;
-auto leftResult = getTargetCopy(original->left, cloned->left, target);
-if (leftResult != nullptr)
-return leftResult;
-return getTargetCopy(original->right, cloned->right, target);
+queue<pair<TreeNode*, TreeNode*>> que;
+que.push({ original, cloned });
+TreeNode* result = nullptr;
+while (!que.empty()) {
+auto front = que.front();   que.pop();
+if (front.first->val == target->val) {
+result = front.second;
+break;
+}
+if (front.first->left)
+que.push({ front.first->left, front.second->left });
+if (front.first->right)
+que.push({ front.first->right, front.second->right });
+}
+return result;
 }
 };
 ​
 // TC: O(n)
-// SC: O(height of tree)
+// SC: O(n/2)
 ```
