@@ -14,13 +14,28 @@ public:
         if (original == nullptr)
             return nullptr;
         
-        if (target->val == cloned->val)
-            return cloned;
+        queue<pair<TreeNode*, TreeNode*>> que;
+        que.push({ original, cloned });
         
-        auto leftResult = getTargetCopy(original->left, cloned->left, target);
-        if (leftResult != nullptr)
-            return leftResult;
+        TreeNode* result = nullptr;
+        while (!que.empty()) {
+            auto front = que.front();   que.pop();
+            
+            if (front.first->val == target->val) {
+                result = front.second;
+                break;
+            }
+            
+            if (front.first->left)
+                que.push({ front.first->left, front.second->left });
+            
+            if (front.first->right)
+                que.push({ front.first->right, front.second->right });
+        }
         
-        return getTargetCopy(original->right, cloned->right, target);
+        return result;
     }
 };
+
+// TC: O(n)
+// SC: O(height of tree)
