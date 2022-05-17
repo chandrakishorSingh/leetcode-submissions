@@ -1,27 +1,39 @@
-queue<pair<TreeNode*, TreeNode*>> que;
-que.push({ original, cloned });
-TreeNode* result = nullptr;
-while (result == nullptr) {
-int n = que.size();
-for (int i = 0; i < n; i++) {
-auto front = que.front();   que.pop();
+Follow up question:
 ​
-if (front.first->val == target->val) {
-result = front.second;
-break;
-}
+- Yes it is possible to solve the problem even when duplicates are allowed. In this case, we can just compare the addresses of the current node of original tree and that of target node instead of comparing their values.
 ​
-if (front.first->left)
-que.push({ front.first->left, front.second->left });
+Solution 1:
 ​
-if (front.first->right)
-que.push({ front.first->right, front.second->right });
-}
-}
-return result;
+- Simple DFS.
+​
+```
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+​
+class Solution {
+public:
+TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+if (original == nullptr)
+return nullptr;
+if (target->val == cloned->val)
+return cloned;
+auto leftResult = getTargetCopy(original->left, cloned->left, target);
+if (leftResult != nullptr)
+return leftResult;
+return getTargetCopy(original->right, cloned->right, target);
 }
 };
 ​
 // TC: O(n)
-// SC: O(n/2)
+// SC: O(height of tree)
 ```
+​
+Solution 2:
+​
