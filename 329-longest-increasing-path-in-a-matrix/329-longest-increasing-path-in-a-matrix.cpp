@@ -7,12 +7,9 @@ public:
         vector<vector<int>> dp(m, vector<int>(n, -1));
         
         int result = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                dfs(i, j, matrix, visited, dp);
-                result = max(result, dp[i][j]);
-            }
-        }
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                result = max(result, dfs(i, j, matrix, visited, dp));
         
         return result;
     }
