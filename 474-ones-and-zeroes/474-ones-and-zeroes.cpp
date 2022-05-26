@@ -11,31 +11,27 @@ public:
             bitCount[1][i] = strs[i].size() - bitCount[0][i];
         }
         
-        vector3d dp(size + 1, vector<vector<int>>(m + 1, vector<int>(n + 1, -1)));
+        vector3d dp(size + 1, vector<vector<int>>(m + 1, vector<int>(n + 1)));
+        for (int i = 1; i <= size; i++) {
+            int zeroCount = bitCount[0][i - 1];
+            int oneCount = bitCount[1][i - 1];
+            
+            for (int j = 0; j <= m; j++) {
+                for (int k = 0; k <= n; k++) {
+                    if (j == 0 && k == 0)
+                        continue;
+                    
+                    int option1 = dp[i - 1][j][k];
+                    int option2 = (zeroCount <= j && oneCount <= k) ? 1 + dp[i - 1][j - zeroCount][k - oneCount]: 0;
+                    
+                    dp[i][j][k] = max(option1, option2);
+                }
+            }
+        }
         
-        return _findMaxForm(size, m, n, bitCount, dp);
-    }
-    
-    int _findMaxForm(int index, int m, int n, vector<vector<int>>& bitCount, vector3d& dp) {
-        if (index == 0)
-            return 0;
-        
-        if (dp[index][m][n] != -1)
-            return dp[index][m][n];
-        
-        int option1 = 0;
-        int option2 = 0;
-        
-        if (bitCount[0][index - 1] <= m && bitCount[1][index - 1] <= n)
-            option1 = 1 + _findMaxForm(index - 1, m - bitCount[0][index - 1], n - bitCount[1][index - 1], bitCount, dp);
-        
-        option2 = _findMaxForm(index - 1, m, n, bitCount, dp);
-        
-        dp[index][m][n] = max(option1, option2);
-        
-        return dp[index][m][n];
+        return dp[size][m][n];
     }
 };
 
 // TC: O(size * m * n)
-// SC: O(n)
+// SC: O(size * m * n)
