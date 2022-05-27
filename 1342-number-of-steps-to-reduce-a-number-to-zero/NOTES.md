@@ -15,3 +15,24 @@ return 1 + ((num & 1) ?  numberOfSteps(num - 1): numberOfSteps(num >> 1));
 // TC: O(log(n))
 // SC: O(log(n))
 ```
+​
+Solution 2:
+​
+- Iterative version of above solution
+​
+```
+class Solution {
+public:
+int numberOfSteps(int num) {
+int result = 0;
+while (num != 0) {
+num = (num & 1) ? num - 1: num >> 1;
+result++;
+}
+return result;
+}
+};
+​
+// TC: O(log(n))
+// SC: O(1)
+```
