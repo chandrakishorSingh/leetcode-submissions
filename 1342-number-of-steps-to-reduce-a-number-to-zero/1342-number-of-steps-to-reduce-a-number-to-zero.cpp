@@ -1,9 +1,15 @@
 class Solution {
 public:
     int numberOfSteps(int num) {
-        if (num == 0)
-            return 0;
+        int result = 0;
+        while (num != 0) {
+            num = (num & 1) ? num - 1: num >> 1;
+            result++;
+        }
         
-        return 1 + ((num & 1) ?  numberOfSteps(num - 1): numberOfSteps(num >> 1));
+        return result;
     }
 };
+
+// TC: O(log(n))
+// SC: O(log(n))
