@@ -15,23 +15,16 @@ public:
         if (root == nullptr)
             return false;
         
-        return dfs(root, targetSum, root->val);
+        return dfs(root, targetSum, 0);
     }
     
     bool dfs(TreeNode* root, int targetSum, int currentSum) {
+        if (root == nullptr)
+            return false;
+        
         if (root->left == nullptr && root->right == nullptr)
-            return currentSum == targetSum;
+            return currentSum + root->val == targetSum;
             
-        bool isTargetFound = false;
-        if (root->left)
-            isTargetFound = dfs(root->left, targetSum, currentSum + root->left->val);
-        
-        if (isTargetFound)
-            return true;
-        
-        if (root->right)
-            isTargetFound = dfs(root->right, targetSum, currentSum + root->right->val);
-        
-        return isTargetFound;
+        return dfs(root->left, targetSum, currentSum + root->val) || dfs(root->right, targetSum, currentSum + root->val);
     }
 };
