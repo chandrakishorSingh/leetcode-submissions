@@ -3,30 +3,30 @@ public:
     int maxProduct(vector<string>& words) {
         int n = words.size();
         
+        vector<vector<int>> alphabets(n, vector<int>(26));
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < words[i].size(); j++)
+                alphabets[i][words[i][j] - 'a'] = 1;
+        
         int result = 0;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                if (!hasCommonChars(words[i], words[j]))
+                bool hasCommonChars = false;
+                for (int k = 0; k < 26; k++) {
+                    if (alphabets[i][k] && alphabets[j][k]) {
+                        hasCommonChars = true;
+                        break;
+                    }
+                }
+                
+                if (!hasCommonChars)
                     result = max(result, (int)words[i].size() * (int)words[j].size());
             }
         }
         
         return result;
     }
-    
-    bool hasCommonChars(string& str1, string& str2) {
-        vector<int> alphabets1(26);
-        for (auto ch: str1)
-            alphabets1[ch - 'a'] = 1;
-        
-        vector<int> alphabets2(26);
-        for (auto ch: str2)
-            alphabets2[ch - 'a'] = 1;
-        
-        for (int i = 0; i < 26; i++)
-            if ((alphabets1[i]) && (alphabets2[i]))
-                return true;
-        
-        return false;
-    }
 };
+
+// TC: O(n * sum(len(words[i])))
+// SC: O(1)
