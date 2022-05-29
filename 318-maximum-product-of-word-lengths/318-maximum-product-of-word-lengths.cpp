@@ -3,16 +3,20 @@ public:
     int maxProduct(vector<string>& words) {
         int n = words.size();
 
-        vector<int> mask(n);
-        for (int i = 0; i < n; i++)
+        unordered_map<int, int> maskToLength;
+        for (int i = 0; i < n; i++) {
+            int mask = 0;
             for (int j = 0; j < words[i].size(); j++)
-                mask[i] |= 1 << (words[i][j] - 'a');
+                mask |= 1 << (words[i][j] - 'a');
+            
+            maskToLength[mask] = max(maskToLength[mask], (int)words[i].size());
+        }
 
         int result = 0;
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
-                if (!(mask[i] & mask[j]))
-                    result = max(result, (int)words[i].size() * (int)words[j].size());
+        for (auto mask1: maskToLength)
+            for (auto mask2: maskToLength)
+                if (!(mask1.first & mask2.first))
+                    result = max(result, (int)mask1.second * (int)mask2.second);
 
         return result;
     }
