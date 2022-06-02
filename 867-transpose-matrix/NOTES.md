@@ -1,6 +1,6 @@
 Solution 1:
 ​
-- Use a different matrix for output
+- Using definition of transpose.
 ​
 ```
 class Solution {
@@ -19,7 +19,4 @@ return result;
 // TC: O(n * m)
 // SC: O(n * m)
 ```
-​
-Solution 2:
-​
 ​
