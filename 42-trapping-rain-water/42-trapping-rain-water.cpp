@@ -21,4 +21,4 @@ public:
 };
 
 // TC: O(n)
-// SC:: O(n)
+// SC: O(n)
