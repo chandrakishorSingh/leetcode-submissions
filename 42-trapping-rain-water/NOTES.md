@@ -1,35 +1,27 @@
-};
+TODO:
 ​
-// TC: O(n * max. height of bars)
-// SC: O(1)
-```
+- Solve using stack and two-pointers approach.
 ​
-Solution 2:
+Solution 1(Brute-Force)
 ​
-- Observations
-- For each of the height, we just need to know how many "blocks" of water can be placed over this bar without spilling the water.
-- we can place `k` blocks of water over a bar of height `h` if there are walls of at least `k + h` height in the left and right side of this bar.
-- Since, we can't spill the water, we can place maximum of `k` blocks of water above a bar of height `h` such that `k = min(max height in right of ith block, max height in left of ith block)`
+- Slice down the bottom row at a time. While doing so, count the number of empty blocks.
+- Make sure that all empty block are inside the pillers
 ​
 ```
 class Solution {
 public:
 int trap(vector<int>& height) {
-int n = height.size();
-vector<int> maxFromLeft(n);
-vector<int> maxFromRight(n);
-for (int i = 1; i < n; i++)
-maxFromLeft[i] = max(maxFromLeft[i - 1], height[i - 1]);
-for (int i = n - 2; i >= 0; i--)
-maxFromRight[i] = max(maxFromRight[i + 1], height[i + 1]);
+int maxHeight = *max_element(height.begin(), height.end());
 int result = 0;
-for (int i = 1; i < n - 1; i++)
-if (min(maxFromLeft[i], maxFromRight[i]) > height[i])
-result += min(maxFromLeft[i], maxFromRight[i]) - height[i];
-return result;
+for (int i = 0; i < maxHeight; i++) {
+int waterBlockCount = 0;
+bool isFirstBarSeen = false;
+for (int j = 0; j < height.size(); j++) {
+if (isFirstBarSeen && height[j] == 0) {
+waterBlockCount++;
+continue;
 }
-};
-​
-// TC: O(n)
-// SC:: O(n)
-```
+if (height[j] != 0 && isFirstBarSeen) {
+result += waterBlockCount;
+waterBlockCount = 0;
+height[j]--;
