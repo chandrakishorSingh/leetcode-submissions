@@ -39,3 +39,6 @@ public:
         return true;
     }
 };
+
+// TC: O(n^n)
+// SC: O(n)
