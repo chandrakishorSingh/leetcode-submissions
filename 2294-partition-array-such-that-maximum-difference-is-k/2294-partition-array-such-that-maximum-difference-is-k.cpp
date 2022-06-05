@@ -5,14 +5,17 @@ public:
         
         int result = 1;
         int anchor = nums[0];
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums[i] - anchor <= k)
+        for (auto num: nums) {
+            if (num - anchor <= k)
                 continue;
             
-            anchor = nums[i];
+            anchor = num;
             result++;
         }
         
         return result;
     }
 };
+
+// TC: O(n * log(n))
+// SC: O(1)
