@@ -4,12 +4,12 @@ public:
         sort(nums.begin(), nums.end());
         
         int result = 1;
-        int anchor = nums[0];
+        int prev = nums[0];
         for (auto num: nums) {
-            if (num - anchor <= k)
+            if (num - prev <= k)
                 continue;
             
-            anchor = num;
+            prev = num;
             result++;
         }
         
