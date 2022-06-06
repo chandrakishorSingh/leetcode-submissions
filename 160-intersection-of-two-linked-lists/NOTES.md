@@ -1,8 +1,10 @@
-Solution 1:
 ​
-- The intersection node is the first node which is common in both of the linked list.
-- Hence, we can store all of the links(addresses) of one linked list. Then we can traverse the other linked list and see if the current link is already seen or not.
-- Since lookup time is important here, we use a `unordered_set`.
+Solution 2:
+​
+- If the given two linked-list intersect then we have following two cases.
+- If the length of both lists are same then we can just advance the pointers until both points to the same node.
+- Otherwise, we need to advance the pointer, with longer length, until its distance with the tail becomes the same as the smaller one. Then it will be the same case as above one.
+- If the lists don't intersect then we will just return `NULL`.
 ​
 ```
 /**
@@ -16,10 +18,29 @@ Solution 1:
 class Solution {
 public:
 ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-unordered_set<ListNode*> links;
-while (headA != nullptr) {
-links.insert(headA);
+int length1 = getLength(headA);
+int length2 = getLength(headB);
+if (length1 > length2)
+swap(headA, headB);
+for (int i = 0; i < abs(length1 - length2); i++)
+headB = headB->next;
+while (headA != headB) {
 headA = headA->next;
+headB = headB->next;
 }
-while (headB != nullptr) {
-if (links.count(headB))
+return headA;
+}
+int getLength(ListNode* head) {
+int result = 0;
+while (head != nullptr) {
+head = head->next;
+result++;
+}
+return result;
+}
+};
+​
+// TC: O(m + n)
+// SC: O(1)
+// m, n are lengths of the given linked list
+```
