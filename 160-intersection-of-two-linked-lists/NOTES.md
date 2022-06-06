@@ -1,3 +1,13 @@
+}
+​
+return nullptr;
+}
+};
+​
+// TC: O(m + n)
+// SC: O(max(m, n))
+// m, n are lengths of the given linked list
+```
 ​
 Solution 2:
 ​
@@ -33,14 +43,3 @@ return headA;
 int getLength(ListNode* head) {
 int result = 0;
 while (head != nullptr) {
-head = head->next;
-result++;
-}
-return result;
-}
-};
-​
-// TC: O(m + n)
-// SC: O(1)
-// m, n are lengths of the given linked list
-```
