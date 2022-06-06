@@ -9,35 +9,18 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int length1 = getLength(headA);
-        int length2 = getLength(headB);
+        ListNode* iter1 = headA;
+        ListNode* iter2 = headB;
         
-        if (length1 > length2)
-            swap(headA, headB);
-        
-        for (int i = 0; i < abs(length1 - length2); i++)
-            headB = headB->next;
-        
-        while (headA != headB) {
-            headA = headA->next;
-            headB = headB->next;
+        while (iter1 != iter2) {
+            iter1 = iter1 == nullptr ? headB: iter1->next;
+            iter2 = iter2 == nullptr ? headA: iter2->next;
         }
         
-        return headA;
-    }
-    
-    int getLength(ListNode* head) {
-        int result = 0;
-        
-        while (head != nullptr) {
-            head = head->next;
-            result++;
-        }
-        
-        return result;
+        return iter1;
     }
 };
 
 // TC: O(m + n)
-// SC: O(max(m, n))
+// SC: O(1)
 // m, n are lengths of the given linked list
