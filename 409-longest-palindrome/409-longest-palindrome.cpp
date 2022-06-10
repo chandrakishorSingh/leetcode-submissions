@@ -1,15 +1,18 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        map<char, int> freq;
+        unordered_map<char, int> freq;
         
         for (auto ch: s)
             freq[ch]++;
         
-        int result = 0;
+        int pairs = 0;
         for (auto it = freq.begin(); it != freq.end(); it++)
-            result += it->second / 2;
+            pairs += it->second / 2;
         
-        return result * 2 == s.size() ? result * 2 : result * 2 + 1;
+        return pairs * 2 == s.size() ? pairs * 2 : pairs * 2 + 1;
     }
 };
+
+// TC: O(n * log(n))
+// SC: O(n)
