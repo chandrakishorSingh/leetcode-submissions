@@ -6,7 +6,7 @@ public:
         int result = 0;
         int sum = 0;
         int start = 0;
-        unordered_map<int, int> lastIndex;
+        map<int, int> lastIndex;
         for (int end = 0; end < n; end++) {
             if (lastIndex.find(nums[end]) != lastIndex.end() && start <= lastIndex[nums[end]]) {
                 int newStart = lastIndex[nums[end]] + 1;
