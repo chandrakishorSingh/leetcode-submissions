@@ -8,12 +8,11 @@ public:
         int start = 0;
         unordered_map<int, int> lastIndex;
         for (int end = 0; end < n; end++) {
-            if (lastIndex.count(nums[end])) {
+            if (lastIndex.find(nums[end]) != lastIndex.end() && start <= lastIndex[nums[end]]) {
                 int newStart = lastIndex[nums[end]] + 1;
                 
                 while (start != newStart) {
                     sum -= nums[start];
-                    lastIndex.erase(nums[start]);
                     start++;
                 }
             }
@@ -27,3 +26,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n)
+// SC: O(n)
