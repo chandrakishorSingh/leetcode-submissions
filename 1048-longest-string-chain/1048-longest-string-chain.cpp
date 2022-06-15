@@ -1,7 +1,7 @@
 class Solution {
 public:
     int longestStrChain(vector<string>& words) {
-        map<string, int> chainLength;
+        unordered_map<string, int> chainLength;
         for (auto& word: words)
             chainLength[word] = 1;
         
