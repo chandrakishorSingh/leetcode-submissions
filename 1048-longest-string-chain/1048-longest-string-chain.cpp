@@ -13,7 +13,6 @@ public:
         
         int result = 0;
         for (auto& word: words) {
-            // cout << word << endl;
             int maxChainLength = 0;
             for (int i = 0; i < word.size(); i++) {
                 string prev = word.substr(0, i) + word.substr(i + 1);
@@ -31,3 +30,5 @@ public:
         return result;
     }
 };
+
+// TC: O()
