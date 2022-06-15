@@ -1,14 +1,20 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        int n = nums.size();
+        int option1 = 0;
+        int option2 = nums[0];
         
-        vector<int> dp(n + 1);
-        dp[1] = nums[0];
+        int result = option2;
+        for (int i = 1; i < nums.size(); i++) {
+            result = max(nums[i] + option1, option2);
+            
+            option1 = option2;
+            option2 = result;
+        }
         
-        for (int i = 2; i <= n; i++)
-            dp[i] = max(nums[i - 1] + dp[i - 2], dp[i - 1]);
-        
-        return dp[n];
+        return result;        
     }
 };
+
+// TC: O(2^n)
+// SC: O(n)
