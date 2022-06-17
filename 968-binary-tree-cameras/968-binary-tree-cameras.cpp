@@ -23,6 +23,10 @@ public:
         
         placeCameras(root->left);
         placeCameras(root->right);
+ 
+        // 0(after traversing it): camera not present here but light is reaching from child nodes 
+        // 1: camera is present here but it can't be lifted one level up as it's child are dependent on this light
+        // 2: camera is present here and can be lifted one level up as child nodes are not dependent on this light
         
         if ((root->left != nullptr && root->left->val == 2) || (root->right != nullptr && root->right->val == 2)) {
             // if possible, try to lift the camera one level up
@@ -43,6 +47,7 @@ public:
         if ((root->left != nullptr && root->left->val == 1) || (root->right != nullptr && root->right->val == 1)) {
             return;
         } else {
+            // if light is not reaching then set a new camera here
             root->val = 2;
         }
     }
@@ -54,3 +59,6 @@ public:
         return countCamera(root->left) + countCamera(root->right) + (root->val != 0 ? 1 : 0);
     }
 };
+
+// TC: O(n)
+// SC: O(n)
