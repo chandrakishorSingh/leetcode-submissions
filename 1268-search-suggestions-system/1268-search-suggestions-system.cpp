@@ -59,8 +59,6 @@ public:
 class Solution {
 public:
     vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
-        sort(products.begin(), products.end());
-        
         Trie trie;
         for (auto product: products)
             trie.insert(product);
