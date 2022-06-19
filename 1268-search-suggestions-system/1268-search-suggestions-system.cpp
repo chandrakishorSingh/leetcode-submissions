@@ -1,7 +1,7 @@
 class TrieNode {
 public:
     vector<TrieNode*> children;
-    vector<string> suggestions;
+    set<string> suggestions;
     
     TrieNode() {
         children.resize(26);
@@ -25,8 +25,9 @@ public:
             
             current = current->children[ch - 'a'];
 
-            if (current->suggestions.size() < 3)
-                current->suggestions.push_back(s);
+            current->suggestions.insert(s);
+            if (current->suggestions.size() > 3)
+                current->suggestions.erase(prev(current->suggestions.end(), 1));
         }
     }
     
@@ -40,7 +41,9 @@ public:
             
             current = current->children[ch - 'a'];
                         
-            result.push_back(current->suggestions);
+            auto start = current->suggestions.begin();
+            auto end = current->suggestions.end();
+            result.push_back(vector<string>(start, end));
         }
         
         if (result.size() < searchWord.size()) {
