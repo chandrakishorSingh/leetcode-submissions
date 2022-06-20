@@ -31,3 +31,6 @@ public:
         return true;
     }
 };
+
+// TC: O(max(len(words[i])) * n * log(n))
+// SC: O(1)
