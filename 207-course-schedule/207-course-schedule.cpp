@@ -29,8 +29,10 @@ public:
             }
             
             for (auto neighbour: adjList[top.second]) {
-                indegree[neighbour]--;
-                pq.push({ indegree[neighbour], neighbour });
+                if (indegree[neighbour] > 0) {
+                    indegree[neighbour]--;
+                    pq.push({ indegree[neighbour], neighbour });
+                }
             }
             
             indegree[top.second] = -1;
