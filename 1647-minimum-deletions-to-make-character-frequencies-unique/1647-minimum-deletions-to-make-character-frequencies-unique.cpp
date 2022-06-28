@@ -5,26 +5,23 @@ public:
         
         for (auto ch: s)
             freq[ch - 'a']++;
-        
-        unordered_set<int> st;
+
+        priority_queue<int> pq(freq.begin(), freq.end());
         int result = 0;
-        for (auto num: freq) {
-            if (num == 0)
+        while (pq.size() != 1) {
+            auto top = pq.top();
+            pq.pop();
+            
+            if (top == 0 || top != pq.top())
                 continue;
             
-            if (st.count(num)) {
-                while (num != 0 && st.count(num)) {
-                    num--;
-                    result++;
-                }
-                
-                if (num != 0)
-                    st.insert(num);
-            } else {
-                st.insert(num);
-            }
+            pq.push(top - 1);
+            result++;
         }
         
         return result;
     }
 };
+
+// TC: O(n + k^2 * log(k))
+// SC: O(k)
