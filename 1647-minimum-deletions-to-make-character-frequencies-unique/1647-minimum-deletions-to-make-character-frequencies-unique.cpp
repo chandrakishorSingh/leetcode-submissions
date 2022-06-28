@@ -6,7 +6,7 @@ public:
         for (auto ch: s)
             freq[ch - 'a']++;
         
-        set<int> st;
+        unordered_set<int> st;
         int result = 0;
         for (auto num: freq) {
             if (num == 0)
