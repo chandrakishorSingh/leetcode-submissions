@@ -2,21 +2,23 @@ class Solution {
 public:
     int minDeletions(string s) {
         vector<int> freq(26);
-        
         for (auto ch: s)
             freq[ch - 'a']++;
 
-        priority_queue<int> pq(freq.begin(), freq.end());
+        sort(freq.begin(), freq.end());
+        
+        int maxFreqAllowed = INT_MAX;
         int result = 0;
-        while (pq.size() != 1) {
-            auto top = pq.top();
-            pq.pop();
+        for (int i = freq.size() - 1; i >= 0; i--) {
+            if (freq[i] == 0)
+                break;
             
-            if (top == 0 || top != pq.top())
-                continue;
-            
-            pq.push(top - 1);
-            result++;
+            if (freq[i] > maxFreqAllowed) {
+                result += freq[i] - maxFreqAllowed;
+                maxFreqAllowed = max(0, maxFreqAllowed - 1);
+            } else {
+                maxFreqAllowed = freq[i] - 1;
+            }
         }
         
         return result;
