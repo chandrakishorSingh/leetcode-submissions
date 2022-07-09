@@ -6,7 +6,10 @@ public:
         int result = 0;
 
         int n = nums.size();
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
+            if (nextJumpReach >= n - 1)
+                return result + 1;
+            
             if (i > currentJumpReach) {
                 currentJumpReach = nextJumpReach;
                 result++;
@@ -18,3 +21,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n)
+// SC: O(1)
