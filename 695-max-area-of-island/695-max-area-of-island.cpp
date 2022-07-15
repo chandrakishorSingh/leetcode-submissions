@@ -9,6 +9,11 @@ public:
             for (int j = 0; j < n; j++)
                 result = max(result, dfs(i, j, grid));
         
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (grid[i][j] == -1)
+                    grid[i][j] = 1;
+        
         return result;
     }
     
@@ -31,3 +36,6 @@ public:
         return result;
     }
 };
+
+// TC: O(m * n)
+// SC: O(m * n)
