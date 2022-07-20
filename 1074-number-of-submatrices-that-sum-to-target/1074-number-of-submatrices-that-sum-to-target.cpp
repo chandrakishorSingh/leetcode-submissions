@@ -9,7 +9,7 @@ public:
             for (int j = 1; j <= n; j++)
                 prefixSum[i][j] = prefixSum[i - 1][j] + prefixSum[i][j - 1] - prefixSum[i - 1][j - 1] + matrix[i - 1][j - 1];
         
-        map<int, int> prefixSumFreq;
+        unordered_map<int, int> prefixSumFreq;
         
         int result = 0;
         for (int i = 0; i < m; i++) {
