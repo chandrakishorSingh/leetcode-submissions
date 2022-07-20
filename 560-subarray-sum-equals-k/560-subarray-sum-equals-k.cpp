@@ -1,7 +1,7 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        map<int, int> cumulativeSumFreq;
+        unordered_map<int, int> cumulativeSumFreq;
         cumulativeSumFreq[0] = 1;
         
         int cumulativeSum = 0;
