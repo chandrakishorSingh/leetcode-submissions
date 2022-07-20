@@ -14,7 +14,8 @@ public:
         int result = 0;
         for (int i = 0; i < m; i++) {
             for (int j = i; j < m; j++) {
-                prefixSumFreq = {{0, 1}};
+                prefixSumFreq.clear();
+                prefixSumFreq[0] = 1;
                 
                 for (int k = 0; k < n; k++) {
                     int cumulativeSum = prefixSum[j + 1][k + 1] - prefixSum[i][k + 1] - prefixSum[j + 1][0] + prefixSum[i][0];
