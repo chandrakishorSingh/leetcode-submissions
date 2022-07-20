@@ -9,8 +9,9 @@ public:
         for (auto num: nums) {
             cumulativeSum += num;
             
-            if (cumulativeSumFreq.count(cumulativeSum - k))
-                result += cumulativeSumFreq[cumulativeSum - k];
+            auto it = cumulativeSumFreq.find(cumulativeSum - k);
+            if (it != cumulativeSumFreq.end())
+                result += it->second;
             
             cumulativeSumFreq[cumulativeSum]++;
         }
