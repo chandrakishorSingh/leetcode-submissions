@@ -9,21 +9,26 @@ public:
             for (int j = 1; j <= n; j++)
                 prefixSum[i][j] = prefixSum[i - 1][j] + prefixSum[i][j - 1] - prefixSum[i - 1][j - 1] + matrix[i - 1][j - 1];
         
+        map<int, int> prefixSumFreq;
+        
         int result = 0;
-        for (int xi = 1; xi <= m; xi++)
-            for (int yi = 1; yi <= n; yi++)
-                for (int xj = xi; xj <= m; xj++)
-                    for (int yj = yi; yj <= n; yj++)
-                        if (matrixSum(prefixSum, xi, yi, xj, yj) == target)
-                            result++;
+        for (int i = 0; i < m; i++) {
+            for (int j = i; j < m; j++) {
+                prefixSumFreq = {{0, 1}};
+                
+                for (int k = 0; k < n; k++) {
+                    int cumulativeSum = prefixSum[j + 1][k + 1] - prefixSum[i][k + 1] - prefixSum[j + 1][0] + prefixSum[i][0];
+                    
+                    auto it = prefixSumFreq.find(cumulativeSum - target);
+                    if (it != prefixSumFreq.end()) {
+                        result += it->second;
+                    }
+                    
+                    prefixSumFreq[cumulativeSum]++;
+                }
+            }
+        }
         
         return result;
     }
-    
-    int matrixSum(vector<vector<int>>& prefixSum, int xi, int yi, int xj, int yj) {
-        return prefixSum[xj][yj] - prefixSum[xi - 1][yj] - prefixSum[xj][yi - 1] + prefixSum[xi - 1][yi - 1];
-    }
 };
-
-// TC: O((m * n)^3)
-// SC: O(1)
