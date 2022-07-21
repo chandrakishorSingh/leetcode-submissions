@@ -10,7 +10,3 @@ public:
         return index == s.size();
     }
 };
-
-// TC: O(2^n * n)
-// SC: O(n)
-// n = length of t
