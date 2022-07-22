@@ -22,7 +22,7 @@ public:
         return result;
     }
     
-    bool isSubSequenceOf(string subSequence, vector<vector<int>>& charToSubarray) {
+    bool isSubSequenceOf(string& subSequence, vector<vector<int>>& charToSubarray) {
         bool result = true;
         int windowStartingIndex = 0;
         int n = charToSubarray[0].size();
