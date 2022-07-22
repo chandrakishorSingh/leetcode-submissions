@@ -14,13 +14,6 @@ public:
             charToSubarray[s[i] - 'a'][i] = i;
         }
         
-        // for (auto& row: charToSubarray) {
-        //     for (auto num: row) {
-        //         cout << num << " ";
-        //     }
-        //     cout << endl;
-        // }
-        
         int result = 0;
         for (auto& word: words)
             if (isSubSequenceOf(word, charToSubarray))
@@ -35,10 +28,7 @@ public:
         int n = charToSubarray[0].size();
         int m = subSequence.size();
         
-        // cout << subSequence << endl;
         for (int i = 0; i < m; i++) {
-            // cout << windowStartingIndex << endl;
-            
             if (windowStartingIndex >= n) {
                 result = false;
                 break;
@@ -57,3 +47,6 @@ public:
         return result;
     }
 };
+
+// TC: O(len(s) + sum(len(words[i])))
+// SC: O(len(s))
