@@ -48,3 +48,6 @@ public:
         return head1 == nullptr ? head2 : head1;
     }
 };
+
+// TC: O(n)
+// SC: O(1)
