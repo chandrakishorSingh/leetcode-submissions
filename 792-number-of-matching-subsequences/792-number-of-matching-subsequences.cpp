@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int numMatchingSubseq(string s, vector<string>& words) {
+    int numMatchingSubseq(string& s, vector<string>& words) {
         int n = s.size();
         vector<vector<int>> charToSubarray(26, vector<int>(n, -1));
         
