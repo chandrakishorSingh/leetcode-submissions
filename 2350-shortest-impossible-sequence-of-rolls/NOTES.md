@@ -1,12 +1,4 @@
-for (int i = 1; i <= k; i++) {
-auto newStartIndex = binarySearch(startIndex, numberToIndices[i]);
-if (newStartIndex == -1) {
-flag = false;
-break;
-}
-que.push(newStartIndex + 1);
-}
-}
+startIndex = maxStartIndex + 1;
 }
 return result;
 }
@@ -27,6 +19,6 @@ return result;
 }
 };
 ​
-// TC: O(k^(n/k) * log(n))
-// SC: O(k^(n/k))
+// TC: O(n * log(n))
+// SC: O(k + n)
 ```
