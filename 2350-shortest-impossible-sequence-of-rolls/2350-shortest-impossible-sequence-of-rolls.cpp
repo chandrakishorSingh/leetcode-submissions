@@ -49,5 +49,5 @@ public:
     }
 };
 
-// TC: O(k^(n/k) * log(n))
-// SC: O(k^(n/k))
+// TC: O(n * log(n))
+// SC: O(k + n)
