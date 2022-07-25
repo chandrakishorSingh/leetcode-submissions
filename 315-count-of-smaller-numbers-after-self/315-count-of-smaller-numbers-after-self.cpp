@@ -13,13 +13,6 @@ public:
         return result;
     }
     
-    void print(vector<int>& nums, int start, int end) {
-        for (int i = start; i <= end; i++)
-            cout << nums[i] << " ";
-        
-        cout << endl;
-    }
-    
     void sort(vector<pair<int, int>>& numberToIndex, vector<int>& result) {
         int n = numberToIndex.size();
         vector<pair<int, int>> aux(n);
@@ -62,3 +55,6 @@ public:
         }
     }
 };
+
+// TC: O(n * log(n))
+// SC: O(n)
