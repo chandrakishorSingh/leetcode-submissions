@@ -10,53 +10,79 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        auto path1 = getPath(root, p);
-        auto path2 = getPath(root, q);
-        
-        int n1 = path1.size();
-        int n2 = path2.size();
-        int it1 = n1 - 1;
-        int it2 = n2 - 1;
         TreeNode* result = nullptr;
-        for (int i = 0; i < min(n1, n2); i++, it1--, it2--) {
-            if (path1[it1]->val != path2[it2]->val)
-                break;
-            
-            result = path1[it1];
-        }
+        bool isFirstSeen = false;
+        bool isSecondSeen = false;
+        
+        dfs(root, p, q, result, isFirstSeen, isSecondSeen);
         
         return result;
     }
     
-    vector<TreeNode*> getPath(TreeNode* root, TreeNode* child) {
-        vector<TreeNode*> result;
-        bool isChildSeen = false;
-        dfs(root, child, result, isChildSeen);
-        
-        return result;
-    }
-    
-    void dfs(TreeNode* root, TreeNode* child, vector<TreeNode*>& result, bool& isChildSeen) {
+    void dfs(TreeNode* root, TreeNode* p, TreeNode* q, TreeNode*& result, bool& isFirstSeen, bool& isSecondSeen) {
         if (root == nullptr)
             return;
         
-        if (root->val == child->val) {
-            isChildSeen = true;
-            result.push_back(root);
+        if (root->val == p->val) {
+            isFirstSeen = true;
+            result = root;
+        }
+        
+        if (root->val == q->val) {
+            isSecondSeen = true;
+            result = root;
+        }
+        
+        if (isFirstSeen) {
+            if (hasChild(root, q))
+                isSecondSeen = true;
+            
             return;
         }
         
-        dfs(root->left, child, result, isChildSeen);
-        
-        if (isChildSeen) {
-            result.push_back(root);
+        if (isSecondSeen) {
+            if (hasChild(root, p))
+                isFirstSeen = true;
+            
             return;
         }
         
-        dfs(root->right, child, result, isChildSeen);
+        dfs(root->left, p, q, result, isFirstSeen, isSecondSeen);
         
-        if (isChildSeen)
-            result.push_back(root);
+        if (isFirstSeen && isSecondSeen)
+            return;
+        
+        if (isFirstSeen || isSecondSeen) {
+            if (isFirstSeen) {
+                if (hasChild(root->right, q)) {
+                    result = root;
+                    isSecondSeen = true;
+                }
+                
+                return;
+            }
+            
+            if (isSecondSeen) {
+                if (hasChild(root->right, p)) {
+                    result = root;
+                    isFirstSeen = true;
+                }
+                
+                return;
+            }
+        }
+        
+        dfs(root->right, p, q, result, isFirstSeen, isSecondSeen);
+    }
+    
+    bool hasChild(TreeNode* root, TreeNode* child) {
+        if (root == nullptr)
+            return false;
+        
+        if (root->val == child->val)
+            return true;
+        
+        return hasChild(root->left, child) || hasChild(root->right, child);
     }
 };
 
