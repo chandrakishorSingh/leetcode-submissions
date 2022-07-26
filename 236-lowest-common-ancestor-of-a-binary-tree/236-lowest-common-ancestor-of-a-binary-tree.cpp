@@ -10,33 +10,55 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        queue<TreeNode*> que({root});
+        auto path1 = getPath(root, p);
+        auto path2 = getPath(root, q);
         
+        int n1 = path1.size();
+        int n2 = path2.size();
+        int it1 = n1 - 1;
+        int it2 = n2 - 1;
         TreeNode* result = nullptr;
-        while (!que.empty()) {
-            auto current = que.front();
-            que.pop();
+        for (int i = 0; i < min(n1, n2); i++, it1--, it2--) {
+            if (path1[it1]->val != path2[it2]->val)
+                break;
             
-            if (hasChild(current, p) && hasChild(current, q))
-                result = current;
-            
-            if (current->left != nullptr)
-                que.push(current->left);
-            
-            if (current->right != nullptr)
-                que.push(current->right);
+            result = path1[it1];
         }
         
         return result;
     }
     
-    bool hasChild(TreeNode* root, TreeNode* child) {
+    vector<TreeNode*> getPath(TreeNode* root, TreeNode* child) {
+        vector<TreeNode*> result;
+        bool isChildSeen = false;
+        dfs(root, child, result, isChildSeen);
+        
+        return result;
+    }
+    
+    void dfs(TreeNode* root, TreeNode* child, vector<TreeNode*>& result, bool& isChildSeen) {
         if (root == nullptr)
-            return false;
+            return;
         
-        if (root->val == child->val)
-            return true;
+        if (root->val == child->val) {
+            isChildSeen = true;
+            result.push_back(root);
+            return;
+        }
         
-        return hasChild(root->left, child) || hasChild(root->right, child);
+        dfs(root->left, child, result, isChildSeen);
+        
+        if (isChildSeen) {
+            result.push_back(root);
+            return;
+        }
+        
+        dfs(root->right, child, result, isChildSeen);
+        
+        if (isChildSeen)
+            result.push_back(root);
     }
 };
+
+// TC: O(n^2)
+// SC: O(n)
