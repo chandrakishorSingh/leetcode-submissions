@@ -11,35 +11,35 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root, vector<TreeNode*>& nodes) {
+    void inorder(TreeNode* root, TreeNode*& prev, TreeNode*& first, TreeNode*& second) {
         if (root == nullptr)
             return;
         
-        inorder(root->left, nodes);
-        nodes.push_back(root);
-        inorder(root->right, nodes);
-    }
-    
-    void recoverTree(TreeNode* root) {
-        vector<TreeNode*> nodes;
-        inorder(root, nodes);
+        inorder(root->left, prev, first, second);
         
-        int first = -1;
-        int second = -1;
-        for (int i = 1; i < nodes.size(); i++) {
-            if (nodes[i]->val < nodes[i - 1]->val) {
-                if (first == -1) {
-                    first = i - 1;
-                    second = i;
+        if (prev != nullptr) {
+            if (prev->val > root->val) {
+                if (first == nullptr) {
+                    first = prev;
+                    second = root;
                 } else {
-                    second = i;
+                    second = root;
                 }
             }
         }
         
-        swap(nodes[first]->val, nodes[second]->val);
+        prev = root;
+        
+        inorder(root->right, prev, first, second);
+    }
+    
+    void recoverTree(TreeNode* root) {
+        TreeNode* prev = nullptr;
+        TreeNode* first = nullptr;
+        TreeNode* second = nullptr;
+        
+        inorder(root, prev, first, second);
+        
+        swap(first->val, second->val);
     }
 };
-
-// TC: O(n)
-// SC: O(n)
