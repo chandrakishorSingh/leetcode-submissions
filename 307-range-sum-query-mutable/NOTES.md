@@ -1,30 +1,21 @@
-Solution 1(Brute-Force, TLE):
-​
-- Summing all elements in `[left, right]` for every call to `sumRange()`.
-​
-```
-class NumArray {
-public:
-vector<int> nums;
-NumArray(vector<int>& nums) {
-this->nums = nums;
+int parent = getParentIndex(i);
+if (parent <= n)
+tree[parent] += tree[i];
+}
 }
 void update(int index, int val) {
-this->nums[index] = val;
+int delta = val - sumRange(index, index);
+int n = tree.size() - 1;
+index++;
+while (index <= n) {
+tree[index] += delta;
+index = getParentIndex(index);
+}
 }
 int sumRange(int left, int right) {
-return accumulate(this->nums.begin() + left, this->nums.begin() + right + 1, 0);
+return prefixSum(right + 1) - prefixSum(left);
 }
 };
-​
-// TC:
-// NumArray(): O(n)
-// sumRange(): O(right - left)
-// update(): O(1)
-// SC:
-// NumArray(): O(n)
-// sumRange(): O(1)
-// update(): O(1)
 ​
 /**
 * Your NumArray object will be instantiated and called as such:
