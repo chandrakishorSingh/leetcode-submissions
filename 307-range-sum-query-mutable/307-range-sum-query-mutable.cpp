@@ -7,7 +7,7 @@ private:
     }
     
     int getChildIndex(int i) {
-        return i - (i & -i);
+        return i & ~(i & -i);
     }
     
     int prefixSum(int i) {
@@ -20,12 +20,6 @@ private:
         
         return sum;
     }
-    
-    void printArray() {
-        for (int i = 1; i < tree.size(); i++)
-            cout << tree[i] << " ";
-        cout << endl;
-    }
 
 public:    
     NumArray(vector<int>& nums) {
@@ -36,32 +30,20 @@ public:
             tree[i] += nums[i - 1];
             
             int parent = getParentIndex(i);
-            // cout << "parent of " << i << " is " << parent << endl;
-            // cout << "parent of " << i << " is " << parent << endl;
-            if (parent <= n) {
+            if (parent <= n)
                 tree[parent] += tree[i];
-            }
         }
-        
-        // printArray();
     }
     
     void update(int index, int val) {
         int delta = val - sumRange(index, index);
         
-        // cout << sumRange(index, index) << endl;
-        // cout << delta << endl;
-        
         int n = tree.size() - 1;
         index++;
         while (index <= n) {
             tree[index] += delta;
-            // cout << "after updating index = " << index << " value is " << tree[index] << endl; 
             index = getParentIndex(index);
         }
-        
-        // printArray();
-        
     }
     
     int sumRange(int left, int right) {
