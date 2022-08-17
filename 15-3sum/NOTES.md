@@ -1,38 +1,45 @@
-Solution 1:
-​
-- Just find all triplets which sum to 0.
-- But be careful of not adding the duplicate triplets. This can be easily achieved by sorting all numbers initially and using a set of vector to store those triplets.
 ​
 ```
 class Solution {
 public:
 vector<vector<int>> threeSum(vector<int>& nums) {
 sort(nums.begin(), nums.end());
-set<vector<int>> triplets;
-for (int i = 0; i < nums.size(); i++)
-for (int j = i + 1; j < nums.size(); j++)
-for (int k = j + 1; k < nums.size(); k++)
-if (nums[i] + nums[j] + nums[k] == 0)
-triplets.insert({nums[i], nums[j], nums[k]});
-vector<vector<int>> result(triplets.begin(), triplets.end());
+​
+vector<vector<int>> result;
+for (int i = 0; i < nums.size() - 1; i++) {
+if (i > 0 && nums[i] == nums[i - 1])
+continue;
+twoSum(-nums[i], i + 1, nums, result);
+}
 return result;
+}
+void twoSum(int target, int startIndex, vector<int>& nums, vector<vector<int>>& result) {
+int left = startIndex;
+int right = nums.size() - 1;
+int num1 = nums[left] - 1;
+int num2 = nums[right] + 1;
+while (left < right) {
+if (nums[left] == num1) {
+left++;
+continue;
+}
+if (nums[right] == num2) {
+right--;
+continue;
+}
+int sum = nums[left] + nums[right];
+if (sum == target) {
+num1 = nums[left];
+num2 = nums[right];
+result.push_back({ -target, nums[left], nums[right] });
+left++;
+right--;
+} else if (sum > target) {
+right--;
+} else {
+left++;
+}
+}
 }
 };
 ​
-// TC: O(n^3 * log(n))
-// SC: O(n^3)
-```
-​
-Solution 2:
-​
-- Since the numbers are already sorted, we can use binary search to find the third element for every possible pair we could make from the array elements.
-- And to be sure that we don't include duplicate triplets, we can remember the last pair we used and make sure that the next pair is different from this one. Since the array is already sorted it's easier to check whether current pair is same as previous one or not.
-​
-```
-class Solution {
-public:
-vector<vector<int>> threeSum(vector<int>& nums) {
-sort(nums.begin(), nums.end());
-int first = nums[0] - 1;
-int second = first;
-set<vector<int>> result;
