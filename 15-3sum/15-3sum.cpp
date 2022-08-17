@@ -2,29 +2,52 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        
-        int first = nums[0] - 1;
-        int second = first;
-        set<vector<int>> result;
-        for (int i = 0; i < nums.size(); i++) {
-            for (int j = i + 1; j < nums.size(); j++) {
-                if (first == nums[i] && second == nums[j])
-                    continue;
-                
-                first = nums[i];
-                second = nums[j];
-                
-                int target = -(nums[i] + nums[j]);
-                auto it = lower_bound(nums.begin() + j + 1, nums.end(), target);
-                
-                if (it != nums.end() && *it == target)
-                    result.insert({ nums[i], nums[j], target });
-            }
+
+        vector<vector<int>> result;
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            
+            twoSum(-nums[i], i + 1, nums, result);
         }
         
-        return vector<vector<int>>(result.begin(), result.end());
+        return result;
+    }
+    
+    void twoSum(int target, int startIndex, vector<int>& nums, vector<vector<int>>& result) {
+        int left = startIndex;
+        int right = nums.size() - 1;
+        int num1 = nums[left] - 1;
+        int num2 = nums[right] + 1;
+        
+        while (left < right) {
+            if (nums[left] == num1) {
+                left++;
+                continue;
+            }
+            
+            if (nums[right] == num2) {
+                right--;
+                continue;
+            }
+            
+            int sum = nums[left] + nums[right];
+            if (sum == target) {
+                num1 = nums[left];
+                num2 = nums[right];
+                
+                result.push_back({ -target, nums[left], nums[right] });
+                
+                left++;
+                right--;
+            } else if (sum > target) {
+                right--;
+            } else {
+                left++;
+            }
+        }
     }
 };
 
-// TC: O(n^3 * log(n))
-// SC: O(1), except the output
+// TC: O(n^2 * log(n))
+// SC: O(n^2)
