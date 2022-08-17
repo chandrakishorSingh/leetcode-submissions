@@ -49,5 +49,5 @@ public:
     }
 };
 
-// TC: O(n^2 * log(n))
-// SC: O(n^2)
+// TC: O(n^2)
+// SC: O(1), except the output
