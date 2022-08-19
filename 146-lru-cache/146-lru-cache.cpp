@@ -16,8 +16,7 @@ private:
     };
     
     class DoublyLinkedList {
-        // private:
-        public:
+        private:
             DoublyLinkedListNode* head;
             DoublyLinkedListNode* tail;
             int currentSize;
@@ -62,7 +61,8 @@ private:
                 
                 auto nodeRef = this->tail;
                 this->tail = this->tail->left;
-                // delete(nodeRef);
+                nodeRef->left->right = nullptr;
+                delete(nodeRef);
                 
                 this->currentSize--;
                 
@@ -109,7 +109,7 @@ public:
             
             return keyToNodeMap[key]->value;
         }
-        
+
         return -1;
     }
     
@@ -127,10 +127,7 @@ public:
         if (lst.size() > this->capacity) {
             auto key = lst.pop_back();
             keyToNodeMap.erase(key);
-            // cout << "deleted key is " << key << endl;
         }
-        
-        // cout << "tail is " << lst.tail->key << endl;
     }
 };
 
