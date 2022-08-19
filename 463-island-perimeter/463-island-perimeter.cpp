@@ -29,3 +29,6 @@ public:
         return result;
     }
 };
+
+// TC: O(m * n), m and n are # of rows and cols of grid respectively
+// SC: O(1)
