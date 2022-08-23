@@ -21,11 +21,14 @@ public:
         if (dp[n][amount] != -1)
             return dp[n][amount];
         
-        int option1 = infinity;
-        if (coins[n - 1] <= amount)
-            option1 = 1 + _coinChange(n, coins, amount - coins[n - 1], dp);
+        int option1 = _coinChange(n - 1, coins, amount, dp);
         
-        int option2 = _coinChange(n - 1, coins, amount, dp);
+        int option2;
+        if (coins[n - 1] <= amount)
+            option2 = 1 + _coinChange(n, coins, amount - coins[n - 1], dp);
+        else
+            option2 = option1;
+        
         
         dp[n][amount] = min(option1, option2);
         
@@ -33,5 +36,5 @@ public:
     }
 };
 
-// TC: O(2^(n + (amount / (min(coins[i])))))
-// SC: O(n + (amount / min(coins[i])))
+// TC: O(n * amount)
+// SC: O(n * amount)
