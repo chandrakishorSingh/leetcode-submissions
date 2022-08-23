@@ -1,30 +1,27 @@
+TODO:
+​
+- Get the longest seq. length path
+- Implement using BIT(https://leetcode.com/problems/longest-increasing-subsequence/discuss/1326308/C%2B%2BPython-DP-Binary-Search-BIT-Solutions-Picture-explain-O(NlogN))
+​
+Solution 1(Brute-Force, TLE):
+​
+- Just check all possible increasing subsequences.
+​
+```
+class Solution {
+public:
 int lengthOfLIS(vector<int>& nums) {
-vector<int> sequence(nums.size());
-int maxSequenceLength = 0;
-for (auto num: nums) {
-auto pos = binarySearch(sequence, maxSequenceLength, num);
-sequence[pos] = num;
-maxSequenceLength = max(maxSequenceLength, pos + 1);
-}
-return maxSequenceLength;
-}
-int binarySearch(vector<int>& sequence, int size, int num) {
-int low = 0;
-int high = size - 1;
-int result = size;
-while (low <= high) {
-int mid = low + (high - low) / 2;
-if (sequence[mid] >= num) {
-result = mid;
-high = mid - 1;
-} else {
-low = mid + 1;
-}
+int result = 0;
+for (int i = 0; i < nums.size(); i++) {
+dfs(nums[i], i + 1, 1, nums, result);
 }
 return result;
 }
-};
-​
-// TC: O(n * log(n))
-// SC: O(n)
-```
+void dfs(int prev, int index, int length, vector<int>& nums, int& result) {
+if (index == nums.size()) {
+result = max(result, length);
+return;
+}
+if (prev < nums[index])
+dfs(nums[index], index + 1, length + 1, nums, result);
+dfs(prev, index + 1, length, nums, result);
