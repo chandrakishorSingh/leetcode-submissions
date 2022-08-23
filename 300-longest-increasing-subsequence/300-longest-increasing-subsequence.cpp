@@ -34,5 +34,5 @@ public:
     }
 };
 
-// TC: O(n^2)
+// TC: O(n * log(n))
 // SC: O(n)
