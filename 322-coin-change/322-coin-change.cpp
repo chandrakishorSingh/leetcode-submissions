@@ -23,12 +23,9 @@ public:
         
         int option1 = _coinChange(n - 1, coins, amount, dp);
         
-        int option2;
+        int option2 = option1;
         if (coins[n - 1] <= amount)
             option2 = 1 + _coinChange(n, coins, amount - coins[n - 1], dp);
-        else
-            option2 = option1;
-        
         
         dp[n][amount] = min(option1, option2);
         
