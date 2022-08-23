@@ -1,35 +1,23 @@
 class Solution {
 public:
-    int infinity = 1e4 + 1;
     
     int coinChange(vector<int>& coins, int amount) {
         int n = coins.size();
-        vector<vector<int>> dp(n + 1, vector<int>(amount + 1, -1));
+        int infinity = 1e4 + 1;
         
-        auto result = _coinChange(n, coins, amount, dp);
+        vector<vector<int>> dp(n + 1, vector<int>(amount + 1));
         
-        return result == infinity ? -1 : result;
-    }
-    
-    int _coinChange(int n, vector<int>& coins, int amount, vector<vector<int>>& dp) {
-        if (amount == 0)
-            return 0;
+        for (int i = 0; i <= amount; i++)
+            dp[0][i] = infinity;
         
-        if (n == 0)
-            return infinity;
+        for (int i = 0; i <= n; i++)
+            dp[i][0] = 0;
         
-        if (dp[n][amount] != -1)
-            return dp[n][amount];
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= amount; j++)
+                dp[i][j] = min(j >= coins[i - 1] ? 1 + dp[i][j - coins[i - 1]] : dp[i - 1][j], dp[i - 1][j]);
         
-        int option1 = _coinChange(n - 1, coins, amount, dp);
-        
-        int option2 = option1;
-        if (coins[n - 1] <= amount)
-            option2 = 1 + _coinChange(n, coins, amount - coins[n - 1], dp);
-        
-        dp[n][amount] = min(option1, option2);
-        
-        return dp[n][amount];
+        return dp[n][amount] == infinity ? -1 : dp[n][amount];
     }
 };
 
