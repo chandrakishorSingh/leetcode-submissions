@@ -9,8 +9,9 @@ public:
         }
         
         vector<vector<string>> result;
-        for (auto it = codeToAnagramGroup.begin(); it != codeToAnagramGroup.end(); it++)
+        for (auto it = codeToAnagramGroup.begin(); it != codeToAnagramGroup.end(); it++) {
             result.push_back(it->second);
+        }
         
         return result;
     }
@@ -21,6 +22,12 @@ public:
         for (auto ch: str)
             freq[ch - 'a']++;
         
-        return string(freq.begin(), freq.end());
+        string result = "";
+        for (auto num: freq)
+            result += to_string(num) + " ";
+        
+        return result;
     }
 };
+
+// TC: O()
