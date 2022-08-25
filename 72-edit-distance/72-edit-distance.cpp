@@ -13,7 +13,6 @@ public:
             dp[0] = i;
             
             for (int j = 1; j <= n2; j++) {
-                // cout << aux << endl;
                 int temp = dp[j];
                 dp[j] = word1[i - 1] == word2[j - 1] ? prev : 1 + min({ dp[j], dp[j - 1], prev });
                 prev = temp;
@@ -25,4 +24,4 @@ public:
 };
 
 // TC: O(n1 * n2)
-// SC: O(n1 * n2)
+// SC: O(n2)
