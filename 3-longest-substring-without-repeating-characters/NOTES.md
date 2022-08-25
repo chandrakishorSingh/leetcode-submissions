@@ -1,31 +1,41 @@
-Solution 1:
+break;
 ​
-- Two pointer/sliding window approach
-- If `s[i:j]` contains duplicate then so is `s[i:j + 1]`, `s[i:j + 2]`, `s[i:j + 3]`, ... Hence, no need to check those extra substrings.
-- Use `start` and `end` pointers. Iterate over the string using end pointer. If a duplicate is found then increment start till it get past the previous duplicate. Hence, in either case(s[end] being duplicate or not), one of the pointer is moved right side. So, the algorithm will take linear time.
+st.insert(s[j]);
+result = max(result, j - i + 1);
+}
+}
+return result;
+}
+};
+​
+// TC: O(n^2)
+// SC: O(1)
+```
+​
+Solution 4:
+​
+- Similar to 1st solution.
+- The only difference is that here the start pointer is not made to traverse to the previously found duplicate position by moving one position at a time. Instead it directly jumps to the required position.
+- We store the last position of each of the characters. This helps in finding whether the currently encountered character is a duplicate or not(by examining whether it's last position lies between the current start and end).
 ​
 ```
 class Solution {
 public:
 int lengthOfLongestSubstring(string s) {
-int result = 0;
-unordered_map<char, int> lastIndex;
+unordered_map<char, int> lastCharacterPos;
 int start = 0;
-int end = 0;
-for (; end < s.size(); end++) {
-if (lastIndex.count(s[end])) {
-while (start <= lastIndex[s[end]])
-lastIndex.erase(s[start++]);
+int result = 0;
+for (int end = 0; end < s.size(); end++) {
+if (lastCharacterPos.count(s[end]) && lastCharacterPos[s[end]] >= start) {
+start = lastCharacterPos[s[end]] + 1;
 }
-lastIndex[s[end]] = end;
+lastCharacterPos[s[end]] = end;
 result = max(result, end - start + 1);
 }
 return result;
 }
 };
 ​
-// TC: O(n)
-// SC: O(# unique chars in s)
+// TC: Θ(n)
+// SC: O(# of unique characters in s)
 ```
-​
-Solution 2(Brute-Force):
