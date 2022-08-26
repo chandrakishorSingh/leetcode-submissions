@@ -24,6 +24,11 @@ public:
         
         string result = "";
         for (int i = 0; i < freq.size(); i++) {
+            while (freq[i] != 0) {
+                result.push_back(freq[i] % 10);
+                freq[i] /= 10;
+            }
+            
             result.append(to_string(freq[i]));
             result.push_back('#');
         }
