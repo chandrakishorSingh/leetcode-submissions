@@ -8,11 +8,9 @@ public:
         int sum = 0;
         for (auto num: nums) {
             sum += num;
-            
             int key = mod(sum, k);
-            if (prefixSumRemainderFreq.count(key))
-                result += prefixSumRemainderFreq[key];
             
+            result += prefixSumRemainderFreq[key];
             prefixSumRemainderFreq[key]++;
         }
         
