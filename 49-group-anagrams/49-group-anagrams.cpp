@@ -22,9 +22,9 @@ public:
         for (auto ch: str)
             freq[ch - 'a']++;
         
-        string result = "";
-        for (auto num: freq)
-            result += to_string(num) + " ";
+        string result;
+        for (int i = 0; i < 26; i++)
+            result += to_string(freq[i]) + " ";
         
         return result;
     }
