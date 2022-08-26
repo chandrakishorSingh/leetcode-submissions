@@ -29,7 +29,7 @@ public:
                 freq[i] /= 10;
             }
             
-            result.append(to_string(freq[i]));
+            // result.append(to_string(freq[i]));
             result.push_back('#');
         }
         
