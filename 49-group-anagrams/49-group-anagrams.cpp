@@ -4,8 +4,9 @@ public:
         unordered_map<string, vector<string>> codeToAnagramGroup;
         
         for (auto& str: strs) {
-            auto code = encode(str);
-            codeToAnagramGroup[code].push_back(str);
+            auto sortedString = string(str);
+            sort(sortedString.begin(), sortedString.end());
+            codeToAnagramGroup[sortedString].push_back(str);
         }
         
         vector<vector<string>> result;
@@ -15,26 +16,7 @@ public:
         
         return result;
     }
-    
-    string encode(string& str) {
-        vector<int> freq(26);
-        
-        for (auto ch: str)
-            freq[ch - 'a']++;
-        
-        string result = "";
-        for (int i = 0; i < freq.size(); i++) {
-            while (freq[i] != 0) {
-                result.push_back(freq[i] % 10);
-                freq[i] /= 10;
-            }
-            
-            // result.append(to_string(freq[i]));
-            result.push_back('#');
-        }
-        
-        return result;
-    }
 };
 
-// TC: O()
+// TC: O(n * k)
+// SC: O(n), except the output
