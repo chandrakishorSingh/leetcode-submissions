@@ -1,17 +1,17 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> cumulativeSumFreq;
-        cumulativeSumFreq[0] = 1;
-        
-        int cumulativeSum = 0;
+        int n = nums.size();
         int result = 0;
-        for (auto num: nums) {
-            cumulativeSum += num;
+
+        unordered_map<int, int> cumulativeSumFreq({{0, 1}});
+        int cumulativeSum = 0;
+        for (int i = 0; i < n; i++) {
+            cumulativeSum += nums[i];
             
-            auto it = cumulativeSumFreq.find(cumulativeSum - k);
-            if (it != cumulativeSumFreq.end())
-                result += it->second;
+            if (cumulativeSumFreq.count(cumulativeSum - k)) {
+                result += cumulativeSumFreq[cumulativeSum - k];
+            }
             
             cumulativeSumFreq[cumulativeSum]++;
         }
@@ -19,3 +19,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n^2)
+// SC: O(1)
