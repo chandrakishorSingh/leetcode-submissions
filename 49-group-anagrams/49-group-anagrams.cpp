@@ -22,10 +22,11 @@ public:
         for (auto ch: str)
             freq[ch - 'a']++;
         
-        auto t = string(freq.begin(), freq.end());
-        // cout << t << endl;
+        string result = "";
+        for (int i = 0; i < freq.size(); i++)
+            result += string(freq[i], 'a' + i);
         
-        return t;
+        return result;
     }
 };
 
