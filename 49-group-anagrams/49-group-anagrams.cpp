@@ -23,8 +23,10 @@ public:
             freq[ch - 'a']++;
         
         string result = "";
-        for (int i = 0; i < freq.size(); i++)
-            result += string(freq[i], 'a' + i);
+        for (int i = 0; i < freq.size(); i++) {
+            result.append(to_string(freq[i]));
+            result.push_back('#');
+        }
         
         return result;
     }
