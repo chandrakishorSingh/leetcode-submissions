@@ -1,35 +1,36 @@
-};
+NOTE:
 ​
-// TC: O(n^2)
-// SC: O(1)
-```
+- Very good explanation of when two pointer technique is valid and when not. https://leetcode.com/problems/subarray-sum-equals-k/discuss/301242/General-summary-of-what-kind-of-problem-can-cannot-solved-by-Two-Pointers
 ​
-Solution 3:
+Solution 1(Brute-Force):
 ​
-- It's the same question that I saw Sandeep(GFG) was solving in a video.
-- The idea is to find the subarray as we are traversing it.
-- If there is a subarray that sum to k and ends at the current position then there should be some subarray(s) that sum to `cs - k` where `cs` is the cumulative sum till the current position.
-- To handle the edge case when the subarray starts at the first index, we should add a cumulative sum of 0 when no array elements are seen yet.
+- Try all possible subarrays.
 ​
 ```
 class Solution {
 public:
 int subarraySum(vector<int>& nums, int k) {
-unordered_map<int, int> cumulativeSumFreq;
-cumulativeSumFreq[0] = 1;
-int cumulativeSum = 0;
+int n = nums.size();
 int result = 0;
-for (auto num: nums) {
-cumulativeSum += num;
-auto it = cumulativeSumFreq.find(cumulativeSum - k);
-if (it != cumulativeSumFreq.end())
-result += it->second;
-cumulativeSumFreq[cumulativeSum]++;
-}
+​
+for (int i = 0; i < n; i++)
+for (int j = i; j < n; j++)
+if (accumulate(nums.begin() + i, nums.begin() + j + 1, 0) == k)
+result++;
+​
 return result;
 }
 };
 ​
-// TC: Θ(n)
-// SC: O(n)
+// TC: O(n^3)
+// SC: O(1)
 ```
+​
+Solution 2:
+​
+- A better brute force.
+- Instead of summing all the values of a subarray every time, we can use the sum of previous subarray to find the sum of current subarray.
+​
+```
+class Solution {
+public:
