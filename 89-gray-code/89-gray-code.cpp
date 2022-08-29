@@ -19,4 +19,4 @@ public:
 };
 
 // TC: O(2^n)
-// SC: O(1), except the output
+// SC: O(n), except the output
