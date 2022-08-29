@@ -9,7 +9,7 @@ public:
         int size = result.size();
         for (int i = size - 1; i >= 0; i--) {
             auto num = result[i];
-            num = num | (1 << (n - 1));
+            num = num + (1 << (n - 1));
             
             result.push_back(num);
         }
