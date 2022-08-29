@@ -1,27 +1,22 @@
 class Solution {
 public:
     vector<int> grayCode(int n) {
-        vector<int> result;
+        if (n == 1)
+            return {0, 1};
         
-        for (int i = 0; i < (1 << n); i++)
-            result.push_back(toGrayCode(i));
+        auto result = grayCode(n - 1);
         
-        return result;
-    }
-    
-    int toGrayCode(int n) {
-        int result = n;
-        
-        for (int i = 14; i >= 0; i--) {
-            auto bit = ((n & (1 << i)) > 0 ? 1: 0) ^ ((n & (1 << (i + 1))) > 0 ? 1: 0);
+        int size = result.size();
+        for (int i = size - 1; i >= 0; i--) {
+            auto num = result[i];
+            num = num | (1 << (n - 1));
             
-            if (bit) {
-                result = result | (1 << i);
-            } else {
-                result = result & ~(1 << i);
-            }
+            result.push_back(num);
         }
         
         return result;
     }
 };
+
+// TC: O(2^n)
+// SC: O(1), except the output
