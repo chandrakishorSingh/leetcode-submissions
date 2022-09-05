@@ -23,3 +23,25 @@ return result;
 // TC: O(n)
 // SC: O(1)
 ```
+​
+Solution 2(Brute-Force):
+​
+- Check every subarray of length 2 with every other subarray of length 2.
+​
+```
+class Solution {
+public:
+bool findSubarrays(vector<int>& nums) {
+for (int i = 0; i < nums.size() - 2; i++) {
+for (int j = i + 1; j < nums.size() - 1; j++) {
+if ((nums[i] + nums[i + 1]) == (nums[j] + nums[j + 1]))
+return true;
+}
+}
+return false;
+}
+};
+​
+// TC: O(n^2)
+// SC: O(1)
+```
