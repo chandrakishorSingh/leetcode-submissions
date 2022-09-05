@@ -26,7 +26,7 @@ public:
         string result = "";
         while (!st.empty()) {
             char digit = st.top() + '0';
-            result.append(1, digit);
+            result.push_back(digit);
             
             st.pop();
         }
