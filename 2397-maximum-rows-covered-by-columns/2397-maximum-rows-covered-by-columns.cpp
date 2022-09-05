@@ -36,5 +36,5 @@ public:
     }
 };
 
-// TC: O()
-// SC: O()
+// TC: O(m * n + (2^n) * m)
+// SC: O(m)
