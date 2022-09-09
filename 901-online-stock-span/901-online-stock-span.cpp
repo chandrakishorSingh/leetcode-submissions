@@ -1,19 +1,17 @@
 class StockSpanner {
 public:
-    stack<pair<int, int>> priceSpan;
+    vector<int> prices;
     
     StockSpanner() {}
     
     int next(int price) {
-        int spanLength = 1;
-        while (!priceSpan.empty() && priceSpan.top().first <= price) {
-            spanLength += priceSpan.top().second;
-            priceSpan.pop();
-        }
+        int count = 1;
+        for (int i = prices.size() - 1; i >= 0 && price >= prices[i]; i--)
+            count++;
         
-        priceSpan.push({ price, spanLength });
+        prices.push_back(price);
         
-        return spanLength;
+        return count;
     }
 };
 
@@ -22,3 +20,6 @@ public:
  * StockSpanner* obj = new StockSpanner();
  * int param_1 = obj->next(price);
  */
+
+// TC: O(i) for the ith call to next()
+// SC: O(i) for the ith call to next()
