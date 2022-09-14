@@ -21,20 +21,20 @@ public:
 class Solution {
 public:
     vector<int> preorder(Node* root) {
-        vector<int> result;
-        
-        dfs(root, result);
-        
-        return result;
-    }
-    
-    void dfs(Node* root, vector<int>& result) {
         if (root == nullptr)
-            return;
+            return vector<int>();
         
+        vector<int> result;
         result.push_back(root->val);
         
-        for (auto& child: root->children)
-            dfs(child, result);
+        for (auto& child: root->children) {
+            for (auto val: preorder(child))
+                result.push_back(val);
+        }
+            
+        return result;
     }
 };
+
+// TC: O(n)
+// SC: O(n)
