@@ -35,14 +35,6 @@ class UF {
 
     return root;
   }
-
-  set<int> getRepresentatives() {
-    set<int> representatives;
-    for (int i = 1; i <= parent.size() - 1; i++)
-      representatives.insert(find(i));
-
-    return representatives;
-  }
 };
 
 class LUPrefix {
