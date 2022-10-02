@@ -1,9 +1,3 @@
-result++;
-} else {
-break;
-}
-}
-return result;
 }
 };
 ​
@@ -20,7 +14,10 @@ return result;
 ​
 Solution 2:
 ​
-- Use BIT.
-- When setting ith index, see if sum(arr[:i]) == `(i + 1) * (i + 2) / 2`. The maximum such i is the answer.
+- Let each of the video be a node. Let there will be an edge between two nodes if they have been uploaded and are adjacent to each other.
+- It's easy to see that the set of videos that have contiguous indices and have been uploaded form a connected component.
+- So, we just need to find the size of connected component that have the node 1.
 ​
+```
 ​
+```
