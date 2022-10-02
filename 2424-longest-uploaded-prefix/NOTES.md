@@ -1,23 +1,32 @@
+if (size[a] < size[b]) swap(a, b);
+​
+parent[b] = a;
+size[a] += size[b];
+components--;
+}
+​
+int find(int a) {
+if (a == parent[a]) return a;
+​
+int root = find(parent[a]);
+parent[a] = root;
+​
+return root;
 }
 };
 ​
-/**
-* Your LUPrefix object will be instantiated and called as such:
-* LUPrefix* obj = new LUPrefix(n);
-* obj->upload(video);
-* int param_2 = obj->longest();
-*/
-​
-// TC: O(n * noOfQueries)
-// SC: O(n)
-```
-​
-Solution 2:
-​
-- Let each of the video be a node. Let there will be an edge between two nodes if they have been uploaded and are adjacent to each other.
-- It's easy to see that the set of videos that have contiguous indices and have been uploaded form a connected component.
-- So, we just need to find the size of connected component that have the node 1.
-​
-```
-​
-```
+class LUPrefix {
+public:
+int size;
+UF* uf;
+vector<int> videoIndex;
+LUPrefix(int n) {
+size = n;
+uf = new UF(n + 1);
+videoIndex.resize(n + 2);
+videoIndex[1] = 1;
+}
+void upload(int video) {
+videoIndex[video + 1] = 1;
+if (videoIndex[video] == 1) {
+uf->unite(video + 1, video);
