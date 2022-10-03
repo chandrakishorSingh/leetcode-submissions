@@ -1,27 +1,21 @@
-rightEnd = rightBlockIndex[video + 1];
-} else if (video != 1 && videos[video -  1] != -1) {
-leftEnd = leftBlockIndex[video - 1];
-rightEnd = video;
-} else {
-leftEnd = video;
-rightEnd = video;
+TODO:
+​
+- easy implementation: https://leetcode.com/problems/longest-uploaded-prefix/discuss/2646696/Python-Elegant-and-Short-or-Amortized-O(1)-or-Commented
+- good one: easy to understand and implement and efficient(amortized constant) : https://leetcode.com/problems/longest-uploaded-prefix/discuss/2646553/C%2B%2B-with-Explanation-oror-Very-Simple-and-Easy-to-Understand-Solution
+​
+Solution 1(Brute-Force, TLE):
+​
+- Just do the simulation.
+​
+```
+class LUPrefix {
+public:
+vector<int> arr;
+LUPrefix(int n) {
+this->arr.resize(n);
 }
-rightBlockIndex[leftEnd] = rightEnd;
-leftBlockIndex[rightEnd] = leftEnd;
-videos[video] = 1;
+void upload(int video) {
+arr[video - 1] = 1;
 }
 int longest() {
-return rightBlockIndex[1];
-}
-};
-​
-/**
-* Your LUPrefix object will be instantiated and called as such:
-* LUPrefix* obj = new LUPrefix(n);
-* obj->upload(video);
-* int param_2 = obj->longest();
-*/
-​
-// TC: O(1) for both upload() and longest()
-// SC: O(n) for LUPrefix() and constant for others
-```
+int result = 0;
