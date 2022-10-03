@@ -47,5 +47,5 @@ public:
  * int param_2 = obj->longest();
  */
 
-// TC: O(total number of calls to upload() and longest())
-// SC: O(n)
+// TC: O(1) for both upload() and longest()
+// SC: O(n) for LUPrefix() and constant for others
