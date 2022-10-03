@@ -1,1 +1,27 @@
+rightEnd = rightBlockIndex[video + 1];
+} else if (video != 1 && videos[video -  1] != -1) {
+leftEnd = leftBlockIndex[video - 1];
+rightEnd = video;
+} else {
+leftEnd = video;
+rightEnd = video;
+}
+rightBlockIndex[leftEnd] = rightEnd;
+leftBlockIndex[rightEnd] = leftEnd;
+videos[video] = 1;
+}
+int longest() {
+return rightBlockIndex[1];
+}
+};
 ​
+/**
+* Your LUPrefix object will be instantiated and called as such:
+* LUPrefix* obj = new LUPrefix(n);
+* obj->upload(video);
+* int param_2 = obj->longest();
+*/
+​
+// TC: O(1) for both upload() and longest()
+// SC: O(n) for LUPrefix() and constant for others
+```
