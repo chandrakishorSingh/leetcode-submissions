@@ -1,33 +1,3 @@
-Solution 1(Brute-Force, TLE):
-​
-- Observations
-- In a tree, there is exactly one path that connects any two given nodes.
-- For every node of the tree, just go to all other nodes and while doing so, evaluate whether this path is a "valid" path or not i.e., whether the value of all nodes lies between the value of the end nodes.
-- So, we have to do a DFS for every node of the tree.
-- One DFS will require O(n + e) time complexity. And the storage space of adjacency list and recursion stack space will require O(n + e) space complexity.
-- Note that we don't need a "visited" array here to keep track of nodes that have been visited so far during a DFS search because there is no cycle in a tree. So, there is no possibility that a path of DFS search will reach to the same node.
-​
-```
-class Solution {
-public:
-int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {
-int n = vals.size();
-vector<vector<int>> adjList(n, vector<int>());
-for (auto& edge: edges) {
-int u = edge[0];
-int v = edge[1];
-adjList[u].push_back(v);
-adjList[v].push_back(u);
-}
-int count = 0;
-for (int i = 0; i < n; i++) {
-count += dfs(i, -1, adjList, vals, vals[i]);
-}
-int result = n + (count / 2);
-return result;
-}
-int dfs(int currentNode, int parentNode, vector<vector<int>>& adjList, vector<int>& vals, int nodeValue) {
-int count = 0;
 if (vals[currentNode] == nodeValue && parentNode != -1) {
 count = 1;
 }
@@ -43,3 +13,31 @@ return count;
 // TC: O((n + e)^2)
 // SC: O(n + e)
 ```
+​
+Solution 2:
+​
+- Use Union-Find.
+- Process the nodes in increasing order of their values. For every node, add all the edges in the UF object that connects it to nodes having equal or less value than its own.
+- Then we just need to find all components that contain at least one node having value equal to that of current one. If in a component, there are `m` such nodes then all of them can be used to make a total of `( m * (m - 1) ) / 2` pairs. And it's easy to see why the path that connects them will not have any node with value greater than the value of end nodes.
+- Although implementation was quite hard and "not elegant"(at least it's the case with my implementation). For a given value of node, I can only count the pairs(that these nodes will make) after I've processed all of the nodes with that value as the component id(representative element of UF components) can change after adding an edge. Hence, I'm checking the component ids only after all of the nodes with the same values have been processed.
+​
+```
+class UnionFind {
+private:
+vector<int> parent;
+vector<int> size;
+public:
+UnionFind(int n) {
+parent.resize(n);
+for (int i = 0; i < n; i++)
+parent[i] = i;
+size.resize(n, 0);
+}
+void unite(int a, int b) {
+a = find(a);
+b = find(b);
+if (a == b)
+return;
+if (size[a] < size[b])
+swap(a, b);
+parent[b] = a;
