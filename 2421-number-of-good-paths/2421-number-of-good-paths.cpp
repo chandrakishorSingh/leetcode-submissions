@@ -98,5 +98,5 @@ public:
     }
 };
 
-// TC: O((n + e)^2)
+// TC: O(n * log(n))
 // SC: O(n + e)
