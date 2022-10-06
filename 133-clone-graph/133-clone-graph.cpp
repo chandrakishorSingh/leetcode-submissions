@@ -22,39 +22,35 @@ public:
 class Solution {
 public:
     Node* cloneGraph(Node* node) {
-        unordered_map<int, vector<int>> adjList;
+        unordered_map<int, Node*> clonedNodes;
+        unordered_set<int> visited;
         
-        dfs(node, adjList);
+        dfs(node, clonedNodes, visited);
         
-        int n = adjList.size();
-        // cout << n << node->val << endl;
-        vector<Node*> nodes(n + 1, nullptr);
-        for (int i = 1; i <= n; i++)
-            nodes[i] = new Node(i);
-        
-        for (auto it: adjList) {
-            int currentNode = it.first;
-            for (auto neighbor: it.second) {
-                nodes[currentNode]->neighbors.push_back(nodes[neighbor]);
-            }
-        }
-        
-        return n == 0 ? nullptr: nodes[1];
+        return clonedNodes.size() == 0 ? nullptr: clonedNodes[1];
     }
     
-    void dfs(Node* node, unordered_map<int, vector<int>>& adjList) {
+    void dfs(Node* node, unordered_map<int, Node*>& clonedNodes, unordered_set<int>& visited) {
         if (node == nullptr)
             return;
         
-        adjList[node->val] = vector<int>();
+        visited.insert(node->val);
+        if (!clonedNodes.count(node->val))
+            clonedNodes[node->val] = new Node(node->val);
         
         for (auto neighbor: node->neighbors) {
-            adjList[node->val].push_back(neighbor->val);
-        }
-        
-        for (auto neighbor: node->neighbors) {
-            if (!adjList.count(neighbor->val))
-                dfs(neighbor, adjList);
+            if (!clonedNodes.count(neighbor->val)) {
+                clonedNodes[neighbor->val] = new Node(neighbor->val);
+            }
+            
+            if (!visited.count(neighbor->val)) {
+                dfs(neighbor, clonedNodes, visited);
+            }
+            
+            clonedNodes[node->val]->neighbors.push_back(clonedNodes[neighbor->val]);
         }
     }
 };
+
+// TC: O(n + e)
+// SC: O(n + e)
