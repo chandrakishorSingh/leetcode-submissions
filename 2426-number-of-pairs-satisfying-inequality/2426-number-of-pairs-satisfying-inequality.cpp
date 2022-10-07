@@ -1,58 +1,57 @@
-class Solution {
-public:
-    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {
-        int n = nums1.size();
-        
-        vector<int> differences(n), aux(n);
-        for (int i = 0; i < n; i++) {
-            differences[i] = nums1[i] - nums2[i];
-        }
-        
-        long long result = 0;
-        mergeSort(differences, aux, 0, n - 1, diff, result);
-        
-        return result;
+class BIT{
+    vector<int> bit;
+    public:
+    int N;
+    BIT(int n){
+        bit = vector<int> (n + 1);
+        N = n;
     }
     
-    void mergeSort(vector<int>& differences, vector<int>& aux, int left, int right, int& diff, long long& result) {
-        if (left == right)
-            return;
+    void upd(int i,int val){
+        i+=1;
+        for(;i <= N;i+=(i & -i)){
+            bit[i] += val;
+        }
+    }
+    
+    int summ(int i){
+       int sum = 0;
+        i+=1;
+         for(;i > 0;i-=(i & -i)){
+            sum += bit[i];
+        }   
+        return sum;
+    }
+    
+};
+
+
+
+class Solution {
+public:
+    long long numberOfPairs(vector<int>& a, vector<int>& b, int diff) {
         
-        int mid = left + ((right - left) / 2);
-        mergeSort(differences, aux, left, mid, diff, result);
-        mergeSort(differences, aux, mid + 1, right, diff, result);
+        int n = a.size();
         
-        for (int i = left; i <= right; i++) {
-            aux[i] = differences[i];
+        long long ans = 0;
+        
+        int c = 1e5;
+        
+        BIT* bb = new BIT(10*c + 1);
+
+        bb->upd(a[0] - b[0] + c, 1);
+
+        for(int j=1;j<n;j++){
+            int x = bb->summ(a[j] - b[j] + diff + c);
+            ans += x;            
+            bb->upd(a[j] - b[j] + c,1);
         }
         
-        int it1 = left;
-        int it2 = mid + 1;
-        for (int i = left; i <= right; i++) {
-            if (it1 > mid || it2 > right) {
-                break;
-            }
-            
-            if (aux[it1] - diff <= aux[it2]) {
-                result += (right - it2 + 1);
-                it1++;
-            } else {
-                it2++;
-            }
-        }
+        return ans;
         
-        it1 = left;
-        it2 = mid + 1;
-        for (int i = left; i <= right; i++) {
-            if (it1 > mid) {
-                differences[i] = aux[it2++];
-            } else if (it2 > right) {
-                differences[i] = aux[it1++];
-            } else if (aux[it1] <= aux[it2]) {
-                differences[i] = aux[it1++];
-            } else {
-                differences[i] = aux[it2++];
-            }
-        }
+        
+        
+        
+        
     }
 };
