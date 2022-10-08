@@ -1,29 +1,18 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        priority_queue<int> pq;
-        
+        vector<int> arr;
         for (auto num: nums1)
-            pq.push(num);
+            arr.push_back(num);
         
         for (auto num: nums2)
-            pq.push(num);
+            arr.push_back(num);
         
-        int totalSize = nums1.size() + nums2.size();
-        int expectedSize = totalSize / 2 + 1;
-        while (pq.size() != expectedSize)
-            pq.pop();
+        sort(arr.begin(), arr.end());
         
-        double result = pq.top();
-        if (totalSize % 2 == 0) {
-            pq.pop();
-            result += pq.top();
-            // cout << result << endl;
-            result /= 2.0;
-        }
-        
-        return result;
+        int middleIndex = arr.size() / 2;
+        return arr.size() % 2 == 0 ? (arr[middleIndex] + arr[middleIndex - 1]) / 2.0 : arr[middleIndex];
     }
 };
-// TC: O(m + n)
-// SC: O(1)
+// TC: O((m + n) * log(m + n))
+// SC: O(m + n)
