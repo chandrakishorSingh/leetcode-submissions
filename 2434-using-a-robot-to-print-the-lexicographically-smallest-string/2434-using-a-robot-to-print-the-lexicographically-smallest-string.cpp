@@ -20,7 +20,7 @@ public:
             if (st.empty() || st.top() > top.first) {
                 pq.pop();
                 
-                result.push_back(top.first);
+                result += string(1, top.first);
             
                 while (index != top.second) {
                     st.push(s[index]);
@@ -32,7 +32,7 @@ public:
                 char ch = st.top();
                 st.pop();
                 
-                result.push_back(ch);
+                result += string(1, ch);
             }
         }
         
@@ -40,9 +40,11 @@ public:
             char ch = st.top();
             st.pop();
             
-            result.push_back(ch);
+            result += string(1, ch);
         }
         
         return result;
     }
 };
+
+// 
