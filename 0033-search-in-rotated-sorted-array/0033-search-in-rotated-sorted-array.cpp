@@ -1,48 +1,46 @@
 class Solution {
 public:
-    int search(vector<int>& vec, int k) {
-        int n = vec.size();
-        int left1 = 0;
-        int right1 = n - 1;
-        int left2 = -1;
-        int right2 = -1;
+    int search(vector<int>& arr, int search_element) {
+int low = 0, high = arr.size();
 
-        for (int i = 1; i < n; i++) {
-            if (vec[i] < vec[i - 1]) {
-                right1 = i - 1;
+    while (low < high) {
+        int mid = low + (high - low) / 2;
 
-                left2 = i;
-                right2 = n - 1;
+        int curr;
 
-                break;
-            }
+        // Check if search_element
+        // falls in first half or
+        // second half
+        if ((arr[mid] < arr[0])
+            == (search_element < arr[0])) {
+            curr = arr[mid];
         }
-        
-        int result = binarySearch(vec, left1, right1, k);
 
-        if (result != -1)
-            return result;
+        // If search_element falls in
+        // second half take min number
+        else if (search_element < arr[0]) {
+            curr = INT_MIN;
+        }
 
-        return left2 == -1 ? -1 : binarySearch(vec, left2, right2, k);
+        // If search_element falls in
+        // first half take max number
+        else {
+            curr = INT_MAX;
+        }
+
+        // Perform binary search
+        // to find the key
+        if (curr < search_element) {
+            low = mid + 1;
+        }
+        else if (curr > search_element) {
+            high = mid;
+        }
+        else {
+            return mid;
+        }
     }
-    
 
-    int binarySearch(vector<int>& vec, int left, int right, int k) {
-        int result = -1;
-
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-
-            if (vec[mid] == k) {
-                result = mid;
-                break;
-            } else if (vec[mid] > k) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-
-        return result;
-    }    
+    return -1;
+    }
 };
