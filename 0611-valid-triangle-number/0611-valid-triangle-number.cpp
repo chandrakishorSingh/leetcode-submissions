@@ -3,11 +3,6 @@ public:
     int triangleNumber(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         
-        // for (auto num: nums)
-        //     cout << num << " ";
-        
-        // cout << endl;
-        
         int result = 0;
         for (int i = 0; i < nums.size(); i++) {
             for (int j = i + 1; j < nums.size(); j++) {
@@ -24,27 +19,12 @@ public:
                     count--;
                 
                 result += count;
-                
-                // cout << left - nums.begin() << " " << right - nums.begin() << " " << count << endl;
             }
         }
         
         return result / 3;
     }
-    
-    bool isValidTriangleSides(int a, int b, int c) {
-        if (a == 0 || b == 0 || c == 0)
-            return false;
-        
-//         if (a + b <= c || b + c <= a || c + a <= b)
-//             return false;
-        
-        if (abs(a - b) >= c || abs(b - c) >= a || abs(c - a) >= b)
-            return false;
-        
-        return true;
-    }
 };
 
-// TC: O(n^3)
-// SC: O(1)
+// TC: O(n^2 * log(n))
+// SC: SC of lower_bound() and upper_bound() or O(1)
