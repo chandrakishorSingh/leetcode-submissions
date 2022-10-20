@@ -5,15 +5,12 @@ public:
         
         int result = 0;
         for (int i = 0; i < nums.size(); i++) {
-            int k = i + 2;
-            
+            int k = i +2;
+
             for (int j = i + 1; j < nums.size(); j++) {
                 k = max(k, j + 1);
                 
-                while ((k < nums.size()) && (nums[i] + nums[j] > nums[k])) {
-                    k++;
-                }
-                
+                k = lower_bound(nums.begin() + k, nums.end(), nums[i] + nums[j]) - nums.begin();
                 result += k - j - 1;
             }
         }
@@ -22,4 +19,5 @@ public:
     }
 };
 
-// TC: O()
+// TC: O(n^3)
+// SC: O(log(n)) for sorting
