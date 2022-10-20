@@ -1,38 +1,39 @@
-Solution 1:
-​
-​
-```
-class Solution {
-public:
-int triangleNumber(vector<int>& nums) {
-int result = 0;
-for (int i = 0; i < nums.size(); i++)
-for (int j = i + 1; j < nums.size(); j++)
-for (int k = j + 1; k < nums.size(); k++)
-if (isValidTriangleSides(nums[i], nums[j], nums[k]))
-result++;
-return result;
+if (left <= nums.begin() + i && count > 0)
+count--;
+result += count;
 }
-bool isValidTriangleSides(int a, int b, int c) {
-if (a == 0 || b == 0 || c == 0)
-return false;
-if (a + b <= c || b + c <= a || c + a <= b)
-return false;
-if (abs(a - b) >= c || abs(b - c) >= a || abs(c - a) >= b)
-return false;
-return true;
+}
+return result / 3;
 }
 };
 ​
-// TC: O(n^3)
-// SC: O(1)
+// TC: O(n^2 * log(n))
+// SC: SC of lower_bound() + upper_bound() + sort() or O(log(n))
 ```
 ​
-Solution 2:
+Soluion 3:
+​
+- Simple implementation of the 2nd approach.
+- We can restrict the array length over which we find the third element. This way we don't end up counting the same triplets again.
+- We'll only search in the subarray [j + 1, n] when we've fixed the pair (i, j) as two sides.
 ​
 ```
 class Solution {
 public:
 int triangleNumber(vector<int>& nums) {
 sort(nums.begin(), nums.end());
+int n = nums.size();
 int result = 0;
+for (int i = 0; i < n; i++) {
+for (int j = i + 1; j < n; j++) {
+auto k = lower_bound(nums.begin() + j + 1, nums.end(), nums[i] + nums[j]) - nums.begin();
+result += k - j - 1;
+}
+}
+return result;
+}
+};
+​
+// TC: O(n^2 * log(n))
+// SC: O(log(n)), usually sorting algo. uses log(n) of recursive stack space
+```
