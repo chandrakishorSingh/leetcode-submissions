@@ -1,7 +1,7 @@
 class Solution {
 public:
     int findMaxK(vector<int>& nums) {
-        unordered_set<int> st;
+        set<int> st;
         
         int result = -1;
         for (auto num: nums) {
