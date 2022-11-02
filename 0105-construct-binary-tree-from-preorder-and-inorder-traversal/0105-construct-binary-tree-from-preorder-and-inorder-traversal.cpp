@@ -16,22 +16,22 @@ public:
         int start = 0;
         int end = inorder.size() - 1;
         
-        unordered_map<int, int> indices;
+        unordered_map<int, int> inorderIndexMap;
         for (int i = 0; i < inorder.size(); i++)
-            indices[inorder[i]] = i;
+            inorderIndexMap[inorder[i]] = i;
         
-        return buildTree(preorder, inorder, indices, i, start, end);
+        return buildTree(preorder, inorder, inorderIndexMap, i, start, end);
     }
     
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder, unordered_map<int, int>& indices, int& i, int start, int end) {
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder, unordered_map<int, int>& inorderIndexMap, int& i, int start, int end) {
         if (start > end)
             return nullptr;
         
-        int index = indices[preorder[i++]];
+        int index = inorderIndexMap[preorder[i++]];
         auto node = new TreeNode(inorder[index]);
         
-        node->left = buildTree(preorder, inorder, indices, i, start, index - 1);
-        node->right = buildTree(preorder, inorder, indices, i, index + 1, end);
+        node->left = buildTree(preorder, inorder, inorderIndexMap, i, start, index - 1);
+        node->right = buildTree(preorder, inorder, inorderIndexMap, i, index + 1, end);
         
         return node;
     }
