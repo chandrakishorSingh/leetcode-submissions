@@ -27,9 +27,6 @@ public:
         if (start > end)
             return nullptr;
         
-        if (start == end)
-            return new TreeNode(preorder[i++]);
-        
         int index = indices[preorder[i++]];
         auto node = new TreeNode(inorder[index]);
         
@@ -39,3 +36,6 @@ public:
         return node;
     }
 };
+
+// TC: Θ(n)
+// SC: O(n)
