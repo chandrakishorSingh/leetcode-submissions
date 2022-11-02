@@ -38,7 +38,6 @@ public:
         }
         
         return result;
-            
     }
 
     // Decodes your encoded data to tree.
@@ -76,10 +75,11 @@ public:
         
         return nodes.size() == 0 ? nullptr : nodes[0];
     }
-    
-    
 };
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser, deser;
 // TreeNode* ans = deser.deserialize(ser.serialize(root));
+
+// serialize: TC: O(n), SC: (n)
+// deserialize: TC: O(n), SC: O(n)
