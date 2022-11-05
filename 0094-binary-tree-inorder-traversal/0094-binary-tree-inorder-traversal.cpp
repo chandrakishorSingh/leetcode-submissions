@@ -21,13 +21,12 @@ public:
         
         vector<int> result;
         while (!st.empty()) {
-            auto top = st.top();
+            auto node = st.top();
             st.pop();
             
-            result.push_back(top->val);
+            result.push_back(node->val);
             
-            auto node = top->right;
-            
+            node = node->right;
             while (node != nullptr) {
                 st.push(node);
                 node = node->left;
