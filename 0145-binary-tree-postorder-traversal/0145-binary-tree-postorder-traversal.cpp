@@ -12,20 +12,47 @@
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
-        vector<int> result;
+        if (root == nullptr)
+            return {};
         
-        postorder(root, result);
+        vector<int> result;
+        stack<TreeNode*> st({root});
+        
+//         while (root != nullptr) {
+//             auto top = st.top();
+            
+//             if (top->right != nullptr)
+//                 st.push(top->right);
+            
+//             if (top->left != nullptr)
+//                 st.push(top->left);
+            
+//             root = root->left;
+//         }
+        
+        TreeNode* prev = nullptr;
+        while (!st.empty()) {
+            auto node = st.top();
+            
+            cout << node->val << " " << (prev == nullptr ? -1 : prev->val) << " " << st.size() << endl;
+            if ((node->left == nullptr and node->right == nullptr) or (prev != nullptr and (node->right == prev or node->left == prev))) {
+                st.pop();
+                prev = node;
+                
+                result.push_back(node->val);
+                continue;
+            }
+            
+            if (node->right != nullptr)
+                st.push(node->right);
+
+            if (node->left != nullptr)
+                st.push(node->left);
+        }
         
         return result;
     }
-    
-    void postorder(TreeNode* root, vector<int>& result) {
-        if (root == nullptr)
-            return;
-        
-        postorder(root->left, result);
-        postorder(root->right, result);
-        
-        result.push_back(root->val);
-    }
 };
+
+// TC: O(n)
+// SC: O(n)
