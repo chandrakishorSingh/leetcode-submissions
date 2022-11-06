@@ -12,14 +12,13 @@ public:
             nums[i + 1] = 0;
         }
         
-        vector<int> result;
-        for (auto num: nums)
-            if (num != 0)
-                result.push_back(num);
+        int i = 0;
+        for (int j = 0; j < nums.size(); j++) {
+            if (nums[j] != 0)
+                swap(nums[i++], nums[j]);
+        }
         
-        result.resize(n, 0);
-        
-        return result;
+        return nums;
     }
 };
 
