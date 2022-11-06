@@ -1,13 +1,3 @@
-TODO:
-​
-- Can you do this in constant space ?
-​
-Solution 1:
-​
-- Using a new array for output.
-​
-```
-class Solution {
 public:
 vector<int> applyOperations(vector<int>& nums) {
 int n = nums.size();
@@ -30,3 +20,15 @@ return result;
 // TC: O(n)
 // SC: O(n)
 ```
+​
+Solution 2(In-Place):
+​
+- Same as 1st one but just in-place.
+​
+```
+class Solution {
+public:
+vector<int> applyOperations(vector<int>& nums) {
+int n = nums.size();
+for (int i = 0; i < n - 1; i++) {
+if (nums[i] != nums[i + 1]) {
