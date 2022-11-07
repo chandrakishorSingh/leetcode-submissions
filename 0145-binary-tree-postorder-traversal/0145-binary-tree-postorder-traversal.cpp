@@ -12,44 +12,30 @@
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
-        if (root == nullptr)
-            return {};
-        
         vector<int> result;
-        stack<TreeNode*> st({root});
+        stack<TreeNode*> st;
         
-//         while (root != nullptr) {
-//             auto top = st.top();
+        while (root != nullptr) {
+            st.push(root);
+            result.push_back(root->val);
             
-//             if (top->right != nullptr)
-//                 st.push(top->right);
-            
-//             if (top->left != nullptr)
-//                 st.push(top->left);
-            
-//             root = root->left;
-//         }
-        
-        TreeNode* prev = nullptr;
-        while (!st.empty()) {
-            auto node = st.top();
-            
-            cout << node->val << " " << (prev == nullptr ? -1 : prev->val) << " " << st.size() << endl;
-            if ((node->left == nullptr and node->right == nullptr) or (prev != nullptr and (node->right == prev or node->left == prev))) {
-                st.pop();
-                prev = node;
-                
-                result.push_back(node->val);
-                continue;
-            }
-            
-            if (node->right != nullptr)
-                st.push(node->right);
-
-            if (node->left != nullptr)
-                st.push(node->left);
+            root = root->right;
         }
         
+        while (!st.empty()) {
+            auto node = st.top();
+            st.pop();
+            
+            node = node->left;
+            while (node != nullptr) {
+                st.push(node);
+                result.push_back(node->val);
+                
+                node = node->right;
+            }
+        }
+        
+        reverse(result.begin(), result.end());
         return result;
     }
 };
