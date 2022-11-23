@@ -68,10 +68,11 @@ public:
         vector<int> values;
         inorder(root, values);
         
-        vector<vector<int>> result;
+        vector<vector<int>> result(queries.size());
         
-        for (auto& query: queries) {
-            result.push_back({ floor(values, query), ceil(values, query) });
+        for (int i = 0; i < queries.size(); i++) {
+            int query = queries[i];
+            result[i] = { floor(values, query), ceil(values, query) };
         }
         
         return result;
