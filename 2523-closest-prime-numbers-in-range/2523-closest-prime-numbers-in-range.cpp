@@ -43,3 +43,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n * log(n))
+// SC: O(n)
