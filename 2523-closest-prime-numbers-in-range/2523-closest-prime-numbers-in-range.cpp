@@ -23,18 +23,20 @@ public:
     }
     
     vector<int> getPrimeNumbers(int lowerLimit, int upperLimit) {
-        vector<int> nums(upperLimit + 1);
+        vector<int> result;
         
+        vector<int> nums(upperLimit + 1);
         for (int i = 2; i <= upperLimit; i++) {
+            if (nums[i]) {
+                continue;
+            }
+            
+            if (i >= lowerLimit) {
+                result.push_back(i);
+            }
+            
             for (int j = 2 * i; j <= upperLimit; j += i) {
                 nums[j] = 1;
-            }
-        }
-        
-        vector<int> result;
-        for (int i = 2; i <= upperLimit; i++) {
-            if (i >= lowerLimit and nums[i] != 1) {
-                result.push_back(i);
             }
         }
         
