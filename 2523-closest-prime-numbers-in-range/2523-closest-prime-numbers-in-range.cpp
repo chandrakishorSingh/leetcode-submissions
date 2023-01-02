@@ -16,6 +16,9 @@ public:
                 num2 = primes[i];
                 
                 minDifference = num2 - num1;
+                if (minDifference == 2) {
+                    break;
+                }
             }
         }
         
