@@ -26,6 +26,10 @@ public:
         vector<int> nums(upperLimit + 1);
         
         for (int i = 2; i <= upperLimit; i++) {
+            if (nums[i]) {
+                continue;
+            }
+            
             for (int j = 2 * i; j <= upperLimit; j += i) {
                 nums[j] = 1;
             }
