@@ -3,7 +3,7 @@ public:
     int distinctPrimeFactors(vector<int>& nums) {
         vector<int> primes = getPrimeNumbers(1000);
         
-        set<int> seen;
+        unordered_set<int> seen;
         for (auto num: nums) {
             for (int i = 0; i < primes.size() and num != 0; i++) {
                 bool flag = false;
