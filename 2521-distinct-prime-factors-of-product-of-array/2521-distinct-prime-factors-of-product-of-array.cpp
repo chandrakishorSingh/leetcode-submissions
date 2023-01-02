@@ -4,23 +4,17 @@ public:
         int maxElement = *max_element(nums.begin(), nums.end());
         vector<int> primes = getPrimeNumbers(maxElement);
         
-        set<int> seen;
-        for (auto num: nums) {
-            for (int i = 0; i < primes.size() and num != 0; i++) {
-                bool flag = false;
-                
-                while (num % primes[i] == 0) {
-                    num /= primes[i];
-                    flag = true;
-                }
-                
-                if (flag) {
-                    seen.insert(primes[i]);
+        int result = 0;
+        for (int i = 0; i < primes.size(); i++) {
+            for (auto num: nums) {
+                if (num % primes[i] == 0) {
+                    result++;
+                    break;
                 }
             }
         }
         
-        return seen.size();
+        return result;
     }
     
     vector<int> getPrimeNumbers(int upperLimit) {
