@@ -1,7 +1,8 @@
 class Solution {
 public:
     int distinctPrimeFactors(vector<int>& nums) {
-        vector<int> primes = getPrimeNumbers(1000);
+        int maxElement = *max_element(nums.begin(), nums.end());
+        vector<int> primes = getPrimeNumbers(maxElement);
         
         set<int> seen;
         for (auto num: nums) {
