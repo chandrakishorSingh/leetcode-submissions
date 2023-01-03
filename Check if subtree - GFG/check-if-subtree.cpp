@@ -93,25 +93,113 @@ struct Node
     }
 };
  */
+ 
 
 class Solution
 {
   public:
-    //Function to check if S is a subtree of tree T.
-    bool isSubTree(Node* T, Node* S) 
-    {
-        if (T == NULL)
-            return false;
-            
-        return isTreeIdentical(T, S) || isSubTree(T->left, S) || isSubTree(T->right, S);
+    void print(vector<int>& nums) {
+        for (auto num: nums) {
+            cout << num << " ";
+        }
         
+        cout << endl;
+    }
+  
+    //Function to check if S is a subtree of tree T.
+    bool isSubTree(Node* T, Node* S) {
+        auto treeInorder = inorder(T);
+        auto subTreeInorder = inorder(S);
+        
+        // print(treeInorder);
+        // print(subTreeInorder);
+        
+        // cout << treeInorder.size() << " " << subTreeInorder.size() << endl;
+        
+        if (!isSubstring(subTreeInorder, treeInorder)) {
+            return false;
+        }
+        
+        auto treePreorder = preorder(T);
+        auto subTreePreorder = preorder(S);
+        
+        return isSubstring(subTreePreorder, treePreorder);
     }
     
-    bool isTreeIdentical(Node* T, Node* S) {
-        if (T == NULL || S == NULL)
-            return T == S;
+    bool isSubstring(vector<int>& pattern, vector<int>& text) {
+        int n = pattern.size();
+        vector<int> lps(n);
+        
+        for (int i = 1; i < n; i++) {
+            int j = lps[i - 1];
             
-        return (T->data == S->data) and isTreeIdentical(T->left, S->left) and isTreeIdentical(T->right, S->right); 
+            while (j > 0 && pattern[j] != pattern[i]) {
+                j = lps[j - 1];
+            }
+            
+            if (pattern[j] == pattern[i]) {
+                j++;
+            }
+            
+            lps[i] = j;
+        }
+        
+        int m = text.size();
+        int j = 0;
+        for (int i = 0; i < m; i++) {
+            while (j > 0 && pattern[j] != text[i]) {
+                j = lps[j - 1];
+            }
+            
+            if (pattern[j] == text[i]) {
+                j++;
+                
+                if (j == n) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    vector<int> inorder(Node* root) {
+        vector<int> result;
+        
+        inorder(root, result);
+        
+        return result;
+    }
+    
+    vector<int> preorder(Node* root) {
+        vector<int> result;
+        
+        preorder(root, result);
+        
+        return result;
+    }
+    
+    void inorder(Node* root, vector<int>& result) {
+        if (root == NULL) {
+            result.push_back(-1);
+            return;
+        }
+            
+        inorder(root->left, result);
+        // cout << root->data << endl;
+        result.push_back(root->data);
+        inorder(root->right, result);
+    }
+    
+    void preorder(Node* root, vector<int>& result) {
+        if (root == NULL) {
+            result.push_back(-1);
+            return;
+        }
+            
+        result.push_back(root->data);
+        preorder(root->left, result);
+        preorder(root->right, result);
     }
 };
 
