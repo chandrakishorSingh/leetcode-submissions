@@ -20,3 +20,6 @@ public:
         return s.substr(0, lps[n - 1]);
     }
 };
+
+// TC: O(n)
+// SC: O(n)
