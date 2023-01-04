@@ -23,18 +23,21 @@ public:
             return root;
         
         dfs(root->left, root, true);
-        dfs(root->right, root->next, false);
+        dfs(root->right, root, false);
         
         return root;
     }
     
-    void dfs(Node* node, Node* aux, bool isLeftChild) {
+    void dfs(Node* node, Node* parent, bool isLeftChild) {
         if (node == NULL)
             return;
         
-        node->next = isLeftChild ? aux->right : (aux == NULL ? NULL : aux->left);
+        node->next = isLeftChild ? parent->right : (parent->next == NULL ? NULL : parent->next->left);
         
         dfs(node->left, node, true);
-        dfs(node->right, node->next, false);
+        dfs(node->right, node, false);
     }
 };
+
+// TC: O(n)
+// SC: O(n)
