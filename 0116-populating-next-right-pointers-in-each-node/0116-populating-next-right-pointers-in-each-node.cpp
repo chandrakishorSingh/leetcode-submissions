@@ -19,23 +19,29 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        if (root == NULL)
-            return root;
+        queue<Node*> que({root});
         
-        dfs(root->left, root, true);
-        dfs(root->right, root, false);
+        while (!que.empty()) {
+            Node* next = NULL;
+            
+            int n = que.size();
+            for (int i = 0; i < n; i++) {
+                auto node = que.front();
+                que.pop();
+                
+                if (node == NULL) {
+                    continue;
+                }
+                
+                node->next = next;
+                next = node;
+                
+                que.push(node->right);
+                que.push(node->left);
+            }
+        }
         
         return root;
-    }
-    
-    void dfs(Node* node, Node* parent, bool isLeftChild) {
-        if (node == NULL)
-            return;
-        
-        node->next = isLeftChild ? parent->right : (parent->next == NULL ? NULL : parent->next->left);
-        
-        dfs(node->left, node, true);
-        dfs(node->right, node, false);
     }
 };
 
