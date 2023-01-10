@@ -31,16 +31,11 @@ public:
         auto right = st2.top(); st2.pop();
         while (left != right) {
             int sum = left->val + right->val;
-            
-            cout << left->val << " " << right->val << endl;
-            
+
             if (sum == k)
                 return true;
             
             if (sum < k) {
-                // left = st1.top();
-                // st1.pop();
-                
                 current = left->right;
                 while (current != nullptr) {
                     st1.push(current);
@@ -50,9 +45,6 @@ public:
                 left = st1.top();
                 st1.pop();
             } else {
-                // right = st2.top();
-                // st2.pop();
-                
                 current = right->left;
                 while (current != nullptr) {
                     st2.push(current);
