@@ -11,11 +11,7 @@ public:
     }
     
     bool consec(int num) {
-        if (num == this->value) {
-            this->freq = min(this->freq + 1, k);
-        } else {
-            this->freq = 0;
-        }
+        this->freq = num == this->value ? min(this->freq + 1, k) : 0;
         
         return this->freq == this->k;
     }
