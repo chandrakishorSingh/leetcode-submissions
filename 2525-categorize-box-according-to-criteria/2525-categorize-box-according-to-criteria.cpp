@@ -6,17 +6,9 @@ public:
         bool isBulky = ((int64_t)length * width * height >= 1e9) || (length >= 1e4) || (width >= 1e4) || (height >= 1e4);
         bool isHeavy = mass >= 100;
         
-        if (isBulky && isHeavy) {
-            result = "Both";
-        } else if (!isBulky && !isHeavy) {
-            result = "Neither";
-        } else if (isBulky && !isHeavy) {
-            result = "Bulky";
-        } else {
-            result = "Heavy";
-        }
+        vector<vector<string>> categories = {{"Neither", "Heavy"}, {"Bulky", "Both"}};
         
-        return result;
+        return categories[isBulky][isHeavy];
     }
 };
 
