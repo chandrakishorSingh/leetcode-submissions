@@ -18,16 +18,9 @@ public:
             power[i] = sum;
         }
         
-        // for (auto x: power) {
-        //     cout << x << " ";
-        // }
-        // cout << endl;
-        
         long long low = *min_element(power.begin(), power.end());
         long long high = *max_element(power.begin(), power.end()) + k;
         
-        // cout << low << " " << high << endl;
-
         long long result = low;
         while (low <= high) {
             long long mid = low + (high - low) / 2;
@@ -44,7 +37,6 @@ public:
     }
     
     bool canSupply(vector<long long>& power, long long requiredPower, int r, int k) {
-        // cout << requiredPower << endl;
         queue<pair<int, int>> que;
         
         long long additionalPower = 0;
@@ -54,9 +46,6 @@ public:
                 que.pop();
             }
             
-            // cout
-            // cout << requiredPower << " " << power[i] + additionalPower << " " << i << " " << additionalPower << " " << k << endl;
-            // cout << 
             if (power[i] + additionalPower >= requiredPower)
                 continue;
             
@@ -72,3 +61,5 @@ public:
         return true;
     }
 };
+
+// 
