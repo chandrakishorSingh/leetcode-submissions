@@ -1,3 +1,9 @@
+TODO:
+​
+- A better implementation https://leetcode.com/problems/maximize-the-minimum-powered-city/discuss/3014915/Binary-Search-Solution-with-Proper-Explanation
+- another one https://leetcode.com/problems/maximize-the-minimum-powered-city/discuss/3015103/Video-Explanation-(Building-solution-from-scratch)
+- and another https://leetcode.com/problems/maximize-the-minimum-powered-city/discuss/3015105/C%2B%2BPython3-or-Explained-why-binary-search
+​
 Solution 1:
 ​
 - It's easy to realize that coming up with a closed form equation for finding the answer to this problem is not easy.
