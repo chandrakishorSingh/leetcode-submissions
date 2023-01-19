@@ -62,4 +62,5 @@ public:
     }
 };
 
-// 
+// TC: O(n * log(sum(stations) + k - min(stations)))
+// SC: O(n)
