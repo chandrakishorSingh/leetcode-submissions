@@ -16,7 +16,3 @@ long long sum = 0;
 for (int i = 0; i < n; i++) {
 sum += stations[i];
 if (i >= r) {
-sum -= (i >= (2 * r + 1)) ? stations[i - (2 * r + 1)] : 0;
-power[i - r] = sum;
-}
-}
