@@ -12,7 +12,35 @@
 class Solution {
 public:
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        return dfs(preorder, 0, preorder.size() - 1);
+        stack<TreeNode*> st;
+        st.push(new TreeNode(preorder.front()));
+        
+        TreeNode* result = st.top();
+        for (int i = 1; i < preorder.size(); i++) {
+            auto node = new TreeNode(preorder[i]);
+            
+            if (st.empty()) {
+                st.push(node);
+                continue;
+            }
+            
+            if (st.top()->val > node->val) {
+                st.top()->left = node;
+                st.push(node);
+                continue;
+            }
+            
+            TreeNode* parent = nullptr;
+            while (!st.empty() && st.top()->val < node->val) {
+                parent = st.top();
+                st.pop();
+            }
+            
+            parent->right = node;
+            st.push(node);
+        }
+        
+        return result;
     }
     
     TreeNode* dfs(vector<int>& preorder, int left, int right) {
@@ -32,3 +60,6 @@ public:
         return root;
     }
 };
+
+// TC: O(n^2)
+// SC: O(n)
