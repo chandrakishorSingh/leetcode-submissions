@@ -42,24 +42,7 @@ public:
         
         return result;
     }
-    
-    TreeNode* dfs(vector<int>& preorder, int left, int right) {
-        if (left > right)
-            return nullptr;
-        
-        TreeNode* root = new TreeNode(preorder[left]);
-        int i = left;
-        int j = right + 1;
-        
-        while ((i + 1 < j) && (preorder[i + 1] < root->val)) i++;
-        while ((j - 1 > i) && (preorder[j - 1] > root->val)) j--;
-        
-        root->left = dfs(preorder, left + 1, i);
-        root->right = dfs(preorder, j, right);
-        
-        return root;
-    }
 };
 
-// TC: O(n^2)
+// TC: O(n)
 // SC: O(n)
