@@ -1,8 +1,16 @@
-Solution 1:
+return result;
+}
+};
 ​
-- The idea is straightforward.
-- Pick the root of the given subtree which is the first of the current preorder traversal. Divide the preorder traversal array into left and right subtree part and do the same on those two subarrays.
-- On avg, TC will be `O(n*log(n))` but can go to quadratic if the tree is skewed.
+// TC: O(n)
+// SC: O(n)
+```
+​
+Solution 3:
+​
+- This is a very concise and clever implementation.
+- The idea is simple. For a given preorder subarray we will assign a upper bound on the value of any node. Then we will use recursion to do the same and further decreasing the size of the subarray.
+- We need to use a global variable which will correctly point to the root of the current subtree by counting the number recursion calls made.
 ​
 ```
 /**
@@ -19,18 +27,19 @@ Solution 1:
 class Solution {
 public:
 TreeNode* bstFromPreorder(vector<int>& preorder) {
-return dfs(preorder, 0, preorder.size() - 1);
+int i = 0;
+return bstFromPreorder(preorder, i, INT_MAX);
 }
-TreeNode* dfs(vector<int>& preorder, int left, int right) {
-if (left > right)
+TreeNode* bstFromPreorder(vector<int>& preorder, int& index, int bound) {
+if (index == preorder.size() || preorder[index] > bound)
 return nullptr;
-TreeNode* root = new TreeNode(preorder[left]);
-int i = left;
-int j = right + 1;
-while ((i + 1 < j) && (preorder[i + 1] < root->val)) i++;
-while ((j - 1 > i) && (preorder[j - 1] > root->val)) j--;
-root->left = dfs(preorder, left + 1, i);
-root->right = dfs(preorder, j, right);
+auto root = new TreeNode(preorder[index++]);
+root->left = bstFromPreorder(preorder, index, root->val);
+root->right = bstFromPreorder(preorder, index, bound);
 return root;
 }
 };
+​
+// TC: O(n)
+// SC: O(n)
+```
