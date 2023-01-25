@@ -34,7 +34,3 @@ root->right = dfs(preorder, j, right);
 return root;
 }
 };
-​
-// TC: O(n^2)
-// SC: O(n)
-```
