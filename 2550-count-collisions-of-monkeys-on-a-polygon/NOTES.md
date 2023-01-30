@@ -1,3 +1,7 @@
+TODO:
+​
+- implement binary exponentiation in constant space with this ref: https://leetcode.com/problems/count-collisions-of-monkeys-on-a-polygon/discuss/3111664/JavaC%2B%2BPython-Should-be-pow(2-n)-4
+​
 Solution 1(TLE):
 ​
 - Since every monkey has to jump one step in either clockwise or anticlockwise direction, every monkey has 2 choices.
@@ -17,20 +21,3 @@ result -= 2;
 if (result <= 0) {
 result += mod;
 }
-return result;
-}
-};
-// TC: O(n)
-// SC: O(1)
-```
-​
-Solution 2:
-​
-- Since we're getting TLE, we need to use binary exponentiation(or fast exponentiation).
-​
-```
-class Solution {
-public:
-int monkeyMove(int n) {
-int mod = 1e9 + 7;
-auto result = power(2, n, mod) - 2;
