@@ -3,20 +3,16 @@ public:
     int balancedStringSplit(string s) {
         int result = 0;
         
-        stack<char> st;
+        int countL = 0;
+        int countR = 0;
         for (auto ch: s) {
-            if (st.empty()) {
-                st.push(ch);
-                continue;
-            }
-            
-            if (st.top() != ch) {
-                st.pop();
+            if (ch == 'R') {
+                countR++;
             } else {
-                st.push(ch);
+                countL++;
             }
             
-            if (st.empty()) {
+            if (countR == countL) {
                 result++;
             }
         }
@@ -24,3 +20,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n)
+// SC: O(n)
