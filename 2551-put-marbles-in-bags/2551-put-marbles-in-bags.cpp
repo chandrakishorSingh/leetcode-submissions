@@ -3,26 +3,23 @@ public:
     typedef long long ll;
     
     long long putMarbles(vector<int>& weights, int k) {
-        priority_queue<int> maxPQ;
-        priority_queue<int, vector<int>, greater<int>> minPQ;
+        int n = weights.size();
+        vector<int> contributions(n - 1);
         
-        for (int i = 0; i < weights.size() - 1; i++) {
-            int value = weights[i] + weights[i + 1];
-            
-            maxPQ.push(value);
-            minPQ.push(value);
+        for (int i = 0; i < n - 1; i++) {
+            contributions[i] = weights[i] + weights[i + 1];
         }
         
+        sort(contributions.begin(), contributions.end());
+        
         ll result = 0;
-        while (k > 1) {
-            result += maxPQ.top() - minPQ.top();
-            
-            maxPQ.pop();
-            minPQ.pop();
-            
-            k--;
+        for (int i = 0; i < k - 1; i++) {
+            result += contributions[n - 2 - i] - contributions[i];
         }
         
         return result;
     }
 };
+
+// TC: O(n * log(n))
+// SC: O(n)
