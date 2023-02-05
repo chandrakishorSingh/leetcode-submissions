@@ -27,5 +27,5 @@ public:
     }
 };
 
-// TC: Θ(n)
-// SC: O(len(banned))
+// TC: O(n)
+// SC: O(n)
