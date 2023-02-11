@@ -16,13 +16,10 @@ class Solution
         }
         
         string previous = lookandsay(n - 1);
-        // cout << n << " previous " << previous << endl;
         string result = "";
         int count = 1;
         char digit = previous[0];
-        // cout << n << " " << " " << num << " " << count << endl;
         for (int i = 1; i < previous.size(); i++) {
-            // cout << "d " << digit << endl;
             if (digit != previous[i]) {
                 result.append(to_string(count));
                 result.push_back(digit);
@@ -36,8 +33,6 @@ class Solution
         
         result.append(to_string(count));
         result.push_back(digit);
-        
-        // cout << "last " << n << " " << result << endl;
         
         return result;
     }   
