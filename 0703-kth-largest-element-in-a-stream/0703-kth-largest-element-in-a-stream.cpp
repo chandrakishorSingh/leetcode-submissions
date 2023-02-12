@@ -36,3 +36,11 @@ public:
  * KthLargest* obj = new KthLargest(k, nums);
  * int param_1 = obj->add(val);
  */
+
+// KthLargest(int k, vector<int>& nums)
+// TC: O(len(nums) * log(k))
+// SC: O(k)
+
+// int add(int val)
+// TC: (log(k))
+// SC: O(1)
