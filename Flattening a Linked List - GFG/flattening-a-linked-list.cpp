@@ -119,19 +119,27 @@ void insertList(Node* root, vector<int>& values) {
 /*  Function which returns the  root of 
     the flattened linked list. */
 Node *flatten(Node *root) {
-    vector<int> values;
+    priority_queue<pair<int, Node*>, vector<pair<int, Node*>>, greater<pair<int, Node*>>> pq;
     
     while (root != NULL) {
-        insertList(root, values);
+        pq.push({ root->data, root });
         root = root->next;
     }
     
-    sort(values.begin(), values.end());
-    
     Node* result = new Node(-1);
     Node* current = result;
-    for (auto value: values) {
-        current->bottom = new Node(value);
+    while (!pq.empty()) {
+        auto top = pq.top();
+        pq.pop();
+        
+        int data = top.first;
+        Node* node = top.second;
+        
+        if (node->bottom != NULL) {
+            pq.push({ node->bottom->data, node->bottom });
+        }
+        
+        current->bottom = new Node(data);
         current = current->bottom;
     }
     
