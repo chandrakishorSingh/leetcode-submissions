@@ -1,7 +1,7 @@
 //{ Driver Code Starts
 // driver code
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Node
@@ -73,28 +73,66 @@ struct Node
 
 */
 
-#include <bits/stdc++.h>
-
 class Solution
 {
-    public:
+public:
+    
+    int findLoopLength(Node* node) {
+        int count = 1;
+        auto it = node->next;
+        
+        while (it != node) {
+            count++;
+            it = it->next;
+        }
+        
+        return count;
+    }
+    
     //Function to remove a loop in the linked list.
     void removeLoop(Node* head)
     {
-        unordered_set<Node*> references;
-        auto it = head;
-        Node* prev = NULL;
+        auto slow = head;
+        auto fast = head->next;
+        bool isLoopFound = false;
         
-        while (it != NULL) {
-            if (references.count(it)) {
-                prev->next = NULL;
+        while (slow != NULL && fast != NULL) {
+            if (slow == fast) {
+                isLoopFound = true;
                 break;
             }
             
-            references.insert(it);
-            prev = it;
-            it = it->next;
+            slow = slow->next;
+            fast = fast->next == NULL ? NULL : fast->next->next;
         }
+        
+        if (!isLoopFound) {
+            return;
+        }
+        
+        // cout << "2" << endl;
+        
+        int loopLength = findLoopLength(slow);
+        
+        // cout << loopLength << endl;
+        
+        auto it1 = head;
+        Node* prev = NULL;
+        for (int i = 0; i < loopLength; i++) {
+            prev = it1;
+            it1 = it1->next;
+        }
+        
+        // cout << "1" << endl;
+        
+        auto it2 = head;
+        while (it1 != it2) {
+            prev = it1;
+            it1 = it1->next;
+            it2 = it2->next;
+        }
+        
+        prev->next = NULL;
     }
 };
 
