@@ -7,20 +7,31 @@ using namespace std;
 
 class Solution {
   public:
+  int countLessThan(int* arr, int n, int value) {
+      int result = 0;
+      for (int i = 0; i < n - 2; i++) {
+          int left = i + 1;
+          int right = n - 1;
+          while (left != right) {
+              int sum = arr[i] + arr[left] + arr[right];
+              
+              if (sum <= value) {
+                  result += right - left;
+                  left++;
+              } else {
+                  right--;
+              }
+          }
+      }
+      
+      return result;
+  }
+  
+  
     int countTriplets(int Arr[], int N, int L, int R) {
         sort(Arr, Arr + N);
         
-        int result = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = i + 1; j < N; j++) {
-                auto l = lower_bound(Arr + j + 1, Arr + N, L - Arr[i] - Arr[j]);
-                auto r = upper_bound(Arr + j + 1, Arr + N, R - Arr[i] - Arr[j]);
-                
-                result += r - l;
-            }
-        }
-        
-        return result;
+        return countLessThan(Arr, N, R) - countLessThan(Arr, N, L - 1);
     }
 };
 
