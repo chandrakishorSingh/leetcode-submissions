@@ -12,23 +12,30 @@ class Solution{
     //railway station such that no train waits.
     int findPlatform(int arr[], int dep[], int n)
     {
-    	vector<int> prefixSum(2361);
-    	
+    	vector<pair<int, int>> intervals(n);
     	for (int i = 0; i < n; i++) {
-    	    int arrivalTime = arr[i];
-    	    int departureTime = dep[i];
-    	    
-    	    prefixSum[arrivalTime]++;
-    	    prefixSum[departureTime + 1]--;
+    	    intervals[i] = {arr[i], dep[i]};
     	}
     	
-    	int result = prefixSum[0];
-    	for (int i = 1; i < prefixSum.size() - 1; i++) {
-    	    prefixSum[i] += prefixSum[i - 1];
-    	    result = max(result, prefixSum[i]);
+    	sort(intervals.begin(), intervals.end());
+    	
+    	priority_queue<int, vector<int>, greater<int>> pq;
+    	int result = 0;
+    	for (int i = 0; i < n; i++) {
+    	    while (!pq.empty() && pq.top() < intervals[i].first) {
+    	        pq.pop();
+    	    }
+    	    
+    	    pq.push(intervals[i].second);
+    	    
+    	    result = max(result, (int)pq.size());
     	}
     	
     	return result;
+    }
+    
+    bool isIntersects(pair<int, int>& interval1, pair<int, int>& interval2) {
+        return interval1.second >= interval2.first;
     }
 };
 
