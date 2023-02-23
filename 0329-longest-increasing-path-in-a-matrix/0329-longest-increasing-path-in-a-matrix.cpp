@@ -39,13 +39,6 @@ public:
             result = max(result, dp[row][col]);
         }
         
-        // for (auto row: dp) {
-        //     for (auto col : row) {
-        //         cout << col << " ";
-        //     }
-        //     cout << endl;
-        // }
-        
         return result;
     }
 };
