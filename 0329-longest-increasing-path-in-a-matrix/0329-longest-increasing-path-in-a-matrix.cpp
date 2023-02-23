@@ -1,9 +1,7 @@
 class Solution {
 public:
-    typedef vector<int> item;
-    
     int longestIncreasingPath(vector<vector<int>>& matrix) {
-        priority_queue<item> pq;
+        priority_queue<vector<int>> pq;
         
         int n = matrix.size();
         int m = matrix[0].size();
@@ -42,3 +40,6 @@ public:
         return result;
     }
 };
+
+// TC: O(n * m * log(n * m))
+// SC: O(n * m)
