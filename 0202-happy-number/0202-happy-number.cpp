@@ -3,7 +3,7 @@ public:
     bool isHappy(int n) {
         vector<int> squares = {0, 1, 4, 9, 16, 25, 36, 49, 64, 81};
         
-        set<int> states;
+        unordered_set<int> states;
         int currentState = n;
         while (true) {
             if (states.count(currentState))
