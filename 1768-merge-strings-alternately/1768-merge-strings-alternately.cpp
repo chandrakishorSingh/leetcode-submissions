@@ -5,19 +5,16 @@ public:
         int it2 = 0;
         
         string result = "";
-        for (; it1 < word1.size() && it2 < word2.size(); it1++, it2++) {
-            result.push_back(word1[it1]);
-            result.push_back(word2[it2]);
-        }
-        
-        while (it1 < word1.size()) {
-            result.push_back(word1[it1]);
-            it1++;
-        }
-        
-        while (it2 < word2.size()) {
-            result.push_back(word2[it2]);
-            it2++;
+        while (it1 < word1.size() || it2 < word2.size()) {
+            if (it1 < word1.size()) {
+                result.push_back(word1[it1]);
+                it1++;
+            }
+            
+            if (it2 < word2.size()) {
+                result.push_back(word2[it2]);
+                it2++;
+            }
         }
         
         return result;
