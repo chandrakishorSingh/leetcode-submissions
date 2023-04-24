@@ -19,3 +19,6 @@ public:
         return result;
     }
 };
+
+// TC: O(log(n))
+// SC: O(1)
