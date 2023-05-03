@@ -34,4 +34,6 @@ public:
     }
 };
 
-// 
+// TC: O(4^n)
+// SC: O(n)
+// n = len(digits)
