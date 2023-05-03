@@ -15,12 +15,12 @@ public:
         
         
         string current = "";
-        _letterCombinations(0, digits, current, digitToCharsMap, result);
+        backtrack(0, digits, current, digitToCharsMap, result);
         
         return result;
     }
     
-    void _letterCombinations(int index, string& digits, string& current, unordered_map<char, vector<char>>& digitToCharsMap, vector<string>& result) {
+    void backtrack(int index, string& digits, string& current, unordered_map<char, vector<char>>& digitToCharsMap, vector<string>& result) {
         if (index == digits.size() && digits.size() > 0) {
             result.push_back(current);
             return;
@@ -28,7 +28,7 @@ public:
         
         for (auto ch: digitToCharsMap[digits[index]]) {
             current.push_back(ch);
-            _letterCombinations(index + 1, digits, current, digitToCharsMap, result);
+            backtrack(index + 1, digits, current, digitToCharsMap, result);
             current.pop_back();
         }
     }
