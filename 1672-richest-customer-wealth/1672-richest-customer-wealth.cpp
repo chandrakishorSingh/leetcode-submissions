@@ -7,13 +7,7 @@ public:
         int n = accounts[0].size();
         
         for (int i = 0; i < m; i++) {
-            int sum = 0;
-            
-            for (int j = 0; j < n; j++) {
-                sum += accounts[i][j];
-            }
-            
-            result = max(result, sum);
+            result = max(result, accumulate(accounts[i].begin(), accounts[i].end(), 0));
         }
         
         return result;
