@@ -1,43 +1,54 @@
 class Solution {
 public:
     long long totalCost(vector<int>& costs, int k, int candidates) {
+        priority_queue<int, vector<int>, greater<int>> start;
+        priority_queue<int, vector<int>, greater<int>> end;
+        
+        int left = 0;
+        int right = costs.size() - 1;
+        for (int i = 0; i < candidates; i++) {
+            if (left > right) {
+                break;
+            }
+            
+            start.push(costs[left]);
+            left++;
+            
+            if (left > right) {
+                break;
+            }
+            
+            end.push(costs[right]);
+            right--;
+        }
+        
         long long result = 0;
-        
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        int left = -1;
-        int right = costs.size();
-        
-        int count = 0;
-        for (; (left + 1 < right) and (count < candidates); left++, count++) {
-            pq.push({ costs[left + 1], left + 1 });
-        }
-        
-        count = 0;
-        for (; (right - 1 > left) and (count < candidates); right--, count++) {
-            pq.push({ costs[right - 1], right - 1 });
-        }
-        
         while (k--) {
-            auto top = pq.top();
-            pq.pop();
+            bool flag = true;
             
-            result += top.first;
+            if (start.empty() || (!end.empty() && start.top() > end.top())) {
+                flag = false;
+            }
             
-            if (right - left == 1)
-                continue;
-            
-            if (top.second <= left) {
-                pq.push({ costs[left + 1], left + 1 });
-                left++;
+            if (flag) {
+                result += start.top();
+                start.pop();
             } else {
-                pq.push({ costs[right - 1], right - 1 });
-                right--;
+                result += end.top();
+                end.pop();
+            }
+            
+            if (left <= right) {
+                if (flag) {
+                    start.push(costs[left]);
+                    left++;
+                } else {
+                    end.push(costs[right]);
+                    right--;
+                }
             }
         }
         
         return result;
     }
 };
-
-// TC: O(n * log(n))
-// SC: O(n)
