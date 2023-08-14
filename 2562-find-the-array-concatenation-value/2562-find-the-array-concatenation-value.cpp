@@ -1,10 +1,10 @@
 class Solution {
 public:
     typedef long long ll;
-    
+
     long long findTheArrayConcVal(vector<int>& nums) {
         ll result = 0;
-        
+
         int left = 0;
         int right = nums.size() - 1;
         for (; left <= right; left++, right--) {
@@ -14,7 +14,7 @@ public:
                 result += nums[left];
             }
         }
-        
+
         return result;
     }
 };
