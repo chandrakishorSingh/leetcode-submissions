@@ -2,20 +2,26 @@ class Solution {
 public:
     typedef long long ll;
     
-    long long countFairPairs(vector<int>& nums, int lower, int upper) {
-        sort(nums.begin(), nums.end());
-        
+    ll countLess(vector<int>& nums, int val) {
         ll result = 0;
         
-        int n = nums.size();
-        for (int i = 0; i < n - 1; i++) {
-            int left = lower_bound(nums.begin() + i + 1, nums.end(), lower - nums[i]) - nums.begin();
-            int right = lower_bound(nums.begin() + i + 1, nums.end(), upper - nums[i] + 1) - nums.begin() - 1;
+        int left = 0;
+        int right = nums.size() - 1;
+        for (; left < right; left++) {
+            while (left < right && nums[left] + nums[right] > val) {
+                right--;
+            }
             
-            result += right - left + 1;
+            result += right - left;
         }
         
         return result;
+    }
+
+    long long countFairPairs(vector<int>& nums, int lower, int upper) {
+        sort(nums.begin(), nums.end());
+        
+        return countLess(nums, upper) - countLess(nums, lower - 1);
     }
 };
 
