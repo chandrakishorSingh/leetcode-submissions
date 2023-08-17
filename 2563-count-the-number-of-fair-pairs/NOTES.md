@@ -26,3 +26,11 @@ return result;
 };
 ​
 // TC: O(n^2)
+// SC: O(1)
+```
+​
+Solution 2:
+​
+- It's easy to see that if the elements were sorted then for each element x we could find all element y such that it's to the right of x and their sum satisfy the required criteria.
+- But if we sort the array then it could be possible that the elements which were left to an element is now at the right of that element(because it was greater than this element).
+- Observe that, even in this situation we can count this pair because at the end of the day we just need a pair of the elements which satisfy the condition.
