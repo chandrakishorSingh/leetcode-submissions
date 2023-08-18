@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> substringXorQueries(string s, vector<vector<int>>& queries) {
-        map<int, vector<int>> substrings;
+        unordered_map<int, vector<int>> substrings;
         
         for (int i = 0; i < s.size(); i++) {
             int value = 0;
@@ -38,3 +38,6 @@ public:
         return result;
     }
 };
+
+// TC: O()
+// SC: O(n)
