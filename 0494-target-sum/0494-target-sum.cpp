@@ -25,7 +25,25 @@ public:
         }
         
         int n = nums.size();
-        return countSubsetSum(nums, (totalSum + target) / 2, n);
+        int width = (totalSum + target) / 2;
+        vector<vector<int>> store(n + 1, vector<int>(width + 1));
+        
+        store[0][0] = 1;
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= width; j++) {
+                int option1 = 0;
+                if (nums[i - 1] <= j) {
+                    option1 = store[i - 1][j - nums[i - 1]];
+                }
+                
+                int option2 = store[i - 1][j];
+                
+                store[i][j] = option1 + option2;
+            }
+        }
+        
+        return store[n][width];
     }
 };
 
