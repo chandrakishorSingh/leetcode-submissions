@@ -2,23 +2,30 @@ class Solution {
 public:
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        vector<vector<int>> store(n + 1, vector<int>(amount + 1));
+        vector<int> current(amount + 1);
+        current[0] = 1;
         
-        for (int i = 0; i <= n; i++) {
-            store[i][0] = 1;
-        }
+        vector<int> next = current;
         
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= amount; j++) {
                 if (j >= coins[i - 1]) {
-                    store[i][j] = store[i - 1][j] + store[i][j - coins[i - 1]];
+                    next[j] = current[j] + next[j - coins[i - 1]];
+                    // cout << "Adding " << current[j] << " and " << next[j - coins[i - 1]] << endl;
                 } else {
-                    store[i][j] = store[i - 1][j];
+                    next[j] = current[j];
                 }
             }
+            
+            current = next;
+            // cout << i << ' ';
+            // for (auto it: current) {
+            //     cout << it << ' ';
+            // }
+            // cout << endl;
         }
         
-        return store[n][amount];
+        return current[amount];
     }
 };
 
