@@ -3,10 +3,6 @@ private:
     typedef vector<vector<vector<vector<int>>>> fourDimentionalVector;
 
     bool _mcm(string& s1, string& s2, int left1, int right1, int left2, int right2, fourDimentionalVector& store) {
-        if (right1 - left1 != right2 - left2) {
-            return false;
-        }
-
         if (left1 == right1) {
             return s1[left1] == s2[left2];
         }
