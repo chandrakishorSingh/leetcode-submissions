@@ -44,7 +44,7 @@ public:
         }
         
         int sum(int node, int treeLeft, int treeRight, int queryLeft, int queryRight) {
-            if (treeRight < queryLeft || treeLeft > queryRight) {
+            if (queryLeft > queryRight) {
                 return 0;
             }
             
