@@ -1,27 +1,22 @@
 class Foo {
-    private volatile int turn = 1;
+    private Semaphore gate2 = new Semaphore(0);
+    private Semaphore gate3 = new Semaphore(0);
 
     public Foo() {}
 
     public void first(Runnable printFirst) throws InterruptedException {
-        
-        // printFirst.run() outputs "first". Do not change or remove this line.
         printFirst.run();
-        turn = 2;
+        gate2.release();
     }
 
     public void second(Runnable printSecond) throws InterruptedException {
-        while (turn != 2) {}
-        
-        // printSecond.run() outputs "second". Do not change or remove this line.
+        gate2.acquire();
         printSecond.run();
-        turn = 3;
+        gate3.release();
     }
 
     public void third(Runnable printThird) throws InterruptedException {
-        while (turn != 3) {}
-        
-        // printThird.run() outputs "third". Do not change or remove this line.
+        gate3.acquire();
         printThird.run();
     }
 }
