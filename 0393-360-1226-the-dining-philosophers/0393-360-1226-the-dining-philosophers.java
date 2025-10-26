@@ -26,6 +26,9 @@ class DiningPhilosophers {
                 this.condition.await();
             }
             
+            this.isForkAvailable[leftFork] = false;
+            this.isForkAvailable[rightFork] = false;
+            
             pickLeftFork.run();
             pickRightFork.run();
             eat.run();
