@@ -1,6 +1,6 @@
 # LeetCode Submissions
 
-This repository contains some of my submissions for the problems of [LeetCode](https://leetcode.com).
+This repository contains some of my submissions for the problems of [LeetCode](https://leetcode.com)(and few from [GeeksforGeeks](https://www.geeksforgeeks.org/) as well).
 
 # Credits
 
