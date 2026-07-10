@@ -11,9 +11,15 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 ## Array
 |  |
 | ------- |
+| [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
 ## Dynamic Programming
 |  |
 | ------- |
+| [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
+## Hash Table
+|  |
+| ------- |
+| [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 <!---LeetCode Topics End-->
