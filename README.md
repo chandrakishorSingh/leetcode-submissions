@@ -11,15 +11,21 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 ## Array
 |  |
 | ------- |
+| [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
 ## Dynamic Programming
 |  |
 | ------- |
+| [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
 ## Hash Table
 |  |
 | ------- |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
+## Matrix
+|  |
+| ------- |
+| [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
 <!---LeetCode Topics End-->
