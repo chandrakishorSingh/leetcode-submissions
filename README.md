@@ -12,6 +12,7 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 |  |
 | ------- |
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
+| [0221-maximal-square](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0221-maximal-square) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
 | [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
@@ -19,6 +20,7 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 |  |
 | ------- |
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
+| [0221-maximal-square](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0221-maximal-square) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
 | [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
@@ -30,5 +32,6 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 |  |
 | ------- |
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
+| [0221-maximal-square](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0221-maximal-square) |
 | [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
 <!---LeetCode Topics End-->
