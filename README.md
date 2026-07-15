@@ -14,12 +14,14 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
+| [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
 ## Dynamic Programming
 |  |
 | ------- |
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
+| [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
 ## Hash Table
 |  |
 | ------- |
@@ -28,4 +30,5 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 |  |
 | ------- |
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
+| [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
 <!---LeetCode Topics End-->
