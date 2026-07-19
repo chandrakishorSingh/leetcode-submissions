@@ -20,6 +20,7 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 |  |
 | ------- |
 | [0064-minimum-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0064-minimum-path-sum) |
+| [0115-distinct-subsequences](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0115-distinct-subsequences) |
 | [0221-maximal-square](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0221-maximal-square) |
 | [0712-minimum-ascii-delete-sum-for-two-strings](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0712-minimum-ascii-delete-sum-for-two-strings) |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
@@ -38,5 +39,6 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 ## String
 |  |
 | ------- |
+| [0115-distinct-subsequences](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0115-distinct-subsequences) |
 | [0712-minimum-ascii-delete-sum-for-two-strings](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0712-minimum-ascii-delete-sum-for-two-strings) |
 <!---LeetCode Topics End-->
