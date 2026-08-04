@@ -16,6 +16,7 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
 | [0746-min-cost-climbing-stairs](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0746-min-cost-climbing-stairs) |
 | [0931-minimum-falling-path-sum](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0931-minimum-falling-path-sum) |
+| [3731-find-missing-elements](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/3731-find-missing-elements) |
 ## Dynamic Programming
 |  |
 | ------- |
@@ -30,6 +31,7 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 |  |
 | ------- |
 | [0740-delete-and-earn](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0740-delete-and-earn) |
+| [3731-find-missing-elements](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/3731-find-missing-elements) |
 ## Matrix
 |  |
 | ------- |
@@ -41,4 +43,8 @@ This repository contains some of my submissions for the problems of [LeetCode](h
 | ------- |
 | [0115-distinct-subsequences](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0115-distinct-subsequences) |
 | [0712-minimum-ascii-delete-sum-for-two-strings](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/0712-minimum-ascii-delete-sum-for-two-strings) |
+## Sorting
+|  |
+| ------- |
+| [3731-find-missing-elements](https://github.com/chandrakishorSingh/leetcode-submissions/tree/master/3731-find-missing-elements) |
 <!---LeetCode Topics End-->
